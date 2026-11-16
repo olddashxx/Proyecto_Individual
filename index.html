@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- === [FUNCIONALIDAD PWA 1]: Meta Tags y Viewport Mandatorio para Adaptabilidad === -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0066cc">
+  <meta name="description" content="Bition S.R.L. — Desarrollo de software especializado en Propiedad Intelectual en Bolivia: Datamark + IA e IPMatic ante el SENAPI.">
+  <title>Bition S.R.L. | Datamark + IA &amp; IPMatic — Propiedad Intelectual Bolivia</title>
+
+  <!-- === [FUNCIONALIDAD PWA 2]: Vinculación del Web App Manifest e Ícono === -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
+
+  <!-- === [FUNCIONALIDAD ARQUITECTURA LIMPIA]: Hoja de Estilos Unificada === -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- === [FUNCIONALIDAD JQUERY]: Librería jQuery 3.7.1 === -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+  <!-- === [FUNCIONALIDAD DETECCIÓN MÓVIL]: Banner automático al detectar pantalla móvil o tablet === -->
+  <div id="bannerDeteccionMovil" class="banner-deteccion-movil">
+    <span>📱 Estás navegando desde un dispositivo móvil. Puedes abrir nuestra versión optimizada para celular.</span>
+    <a href="mobile.html" class="btn-cambio-vista">Ir a Vista Celular</a>
+  </div>
+
+  <!-- === [FUNCIONALIDAD NAVBAR + HIDRATACIÓN SSR + DETECTOR RED + DARK MODE] === -->
+  <header class="navbar-bition">
+    <div class="navbar-inner">
+      <a href="#inicio" class="brand-bition">
+        <img src="icons/icon-192.svg" alt="Logo Bition S.R.L." width="40" height="40">
+        <div class="brand-texto">
+          <h1>Bition S.R.L.</h1>
+          <small>Datamark + IA • IPMatic</small>
+        </div>
+      </a>
+
+      <!-- Navegación Desktop estilo portal corporativo bition.com.bo -->
+      <ul class="nav-links-desktop">
+        <li><a href="#quienes-somos">Quiénes Somos</a></li>
+        <li><a href="#servicios">Soluciones</a></li>
+        <li><a href="#buscador-ia">Buscador de Marcas</a></li>
+        <li><a href="#expedientes-senapi">Gestión SENAPI</a></li>
+        <li><a href="#cotizador">Planes</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Detector visual de estado Online / Offline -->
+        <span id="estadoRed" class="estado-red-badge">🟢 En Línea</span>
+
+        <!-- Botón de Modo Oscuro / Claro (DOM nativo classList.toggle + Hidratación) -->
+        <button id="themeBtn" class="btn-secundario btn-hidratable" data-hidratado="false" type="button" title="Cambiar apariencia">🌓 Tema</button>
+
+        <!-- Enlace a la vista para celulares (mobile.html) -->
+        <a href="mobile.html" class="btn-cambio-vista">📱 Vista Celular</a>
+
+        <!-- Contenedor con Hidratación SSR aplicada a cada botón -->
+        <div id="contenedorMenu" data-hidratado="false" style="display:inline-flex; gap:6px;">
+          <button id="hamburgerBtn" class="menu-toggle btn-hidratable" data-hidratado="false" type="button" aria-label="Menú Rápido">☰</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menú Hamburguesa Desplegable con jQuery slideToggle -->
+    <nav class="nav-menu" id="navMenu">
+      <ul>
+        <li><a href="#quienes-somos">🏢 Quiénes Somos</a></li>
+        <li><a href="#servicios">🧠 Ecosistema Datamark e IPMatic</a></li>
+        <li><a href="#buscador-ia">🔎 Buscador de Marcas — Gaceta Oficial de Bolivia</a></li>
+        <li><a href="#expedientes-senapi">⚖️ Trámites, Oposiciones y Control de Plazos SENAPI</a></li>
+        <li><a href="#cotizador">💼 Planes y Cotización Empresarial</a></li>
+        <li><a href="#actividad">📋 Centro de Consultas y Solicitudes</a></li>
+        <li><a href="#contacto">✉️ Solicitar Demostración</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="desktop-wrapper" id="inicio">
+
+    <!-- === [SECCIÓN HERO PORTAL BITION.COM.BO]: Presentación y Accesos Principales === -->
+    <section class="hero-bition">
+      <div>
+        <span class="hero-badge">Propiedad Intelectual en Bolivia • Desde el 26 de abril de 2017</span>
+        <h2>Software Especializado para el Registro, Vigilancia y Gestión de Marcas</h2>
+        <p>
+          En <strong>Bition S.R.L.</strong> transformamos la gestión de la Propiedad Intelectual en Bolivia mediante tecnología de vanguardia, brindando certeza jurídica y automatización en cada proceso ante el <strong>SENAPI</strong> y la <strong>Gaceta Oficial de Bolivia</strong>.
+        </p>
+        <div class="hero-cta-group">
+          <a href="#buscador-ia" class="btn-accion">🔎 Consultar en Datamark + IA</a>
+          <a href="#expedientes-senapi" class="btn-primario">⚖️ Gestionar en IPMatic</a>
+          <a href="mobile.html" class="btn-secundario">📱 Versión Móvil</a>
+        </div>
+      </div>
+
+      <!-- Tarjetas estilo portal bition.com.bo -->
+      <div class="hero-ecosistema-cards">
+        <div class="hero-mini-card">
+          <h3>Datamark <span class="pill-plataforma">Gaceta Oficial</span></h3>
+          <p>Almacenamiento y migración mensual de marcas publicadas en la Gaceta Oficial de la República de Bolivia para estudios inmediatos de anterioridades.</p>
+        </div>
+        <div class="hero-mini-card card-ia">
+          <h3>Datamark + IA <span class="pill-plataforma">Búsqueda Mixta y Visual</span></h3>
+          <p>Motor con Inteligencia Artificial para búsquedas silábicas, fonéticas, semánticas, naturales y reconocimiento figurativo de logotipos.</p>
+        </div>
+        <div class="hero-mini-card card-ipmatic">
+          <h3>IPMatic <span class="pill-plataforma">ERP Propiedad Intelectual</span></h3>
+          <p>Gestión integral ante el SENAPI: formularios, publicación en Gaceta, registro, oposiciones (demandante/demandado), denegatorias, plazos y expedientes escaneados.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- === [CONTENIDO PDF "QUE ES BITION"]: Quiénes Somos === -->
+    <section id="quienes-somos" class="seccion-card">
+      <div class="seccion-header">
+        <h2>Quiénes Somos</h2>
+        <span class="seccion-subtitulo">Bition S.R.L. — Fundada el 26 de abril de 2017</span>
+      </div>
+      <div class="grid-2-cols">
+        <div>
+          <p style="margin-bottom: 12px;">
+            En <strong>Bition</strong>, transformamos la gestión de la Propiedad Intelectual en Bolivia mediante tecnología de vanguardia. Fundada el <strong>26 de abril de 2017</strong>, nuestra empresa de desarrollo de software nació con una misión clara: modernizar, agilizar y brindar certeza jurídica a los procesos de registro y protección de marcas en el país.
+          </p>
+          <p>
+            Combinamos años de experiencia en ingeniería de software con un profundo conocimiento de las normativas y procedimientos ante el <strong>Servicio Nacional de Propiedad Intelectual (SENAPI)</strong> y la <strong>Gaceta Oficial de Bolivia</strong>.
+          </p>
+        </div>
+        <div>
+          <p style="margin-bottom: 12px;">
+            Desarrollamos herramientas digitales diseñadas específicamente para <strong>estudios jurídicos, agentes de propiedad intelectual y departamentos legales de empresas</strong> que buscan reemplazar los procesos manuales por sistemas inteligentes, precisos y automatizados.
+          </p>
+          <div class="item-card">
+            <strong>Ecosistema Tecnológico Integral:</strong> Hemos creado dos plataformas especializadas (<strong>Datamark</strong> e <strong>IPMatic</strong>) que cubren todo el ciclo de vida de una marca: desde la investigación previa de viabilidad hasta el seguimiento legal continuo.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === [FUNCIONALIDAD DOM 2 + CONTENIDO SERVICIOS]: Filtrado de Tarjetas por data-categoria === -->
+    <section id="servicios" class="seccion-card">
+      <div class="seccion-header">
+        <h2>Nuestros Servicios y Soluciones Tecnológicas</h2>
+        <span class="seccion-subtitulo">Soluciones diseñadas para el ciclo completo de tu marca</span>
+      </div>
+
+      <!-- Botones que filtran dinámicamente las tarjetas mediante dataset.categoria e hidratación -->
+      <div class="filtros-categoria">
+        <button class="btn-primario btn-filtro-cat btn-hidratable" data-hidratado="false" type="button" data-cat="todos">Todas las Soluciones</button>
+        <button class="btn-secundario btn-filtro-cat btn-hidratable" data-hidratado="false" type="button" data-cat="datamark">Datamark</button>
+        <button class="btn-secundario btn-filtro-cat btn-hidratable" data-hidratado="false" type="button" data-cat="ia-figurativa">Datamark + IA Visual</button>
+        <button class="btn-secundario btn-filtro-cat btn-hidratable" data-hidratado="false" type="button" data-cat="ipmatic">IPMatic</button>
+      </div>
+
+      <div class="grid-3-cols">
+        <!-- Tarjeta 1: Datamark -->
+        <article class="tarjeta-modulo" data-categoria="datamark">
+          <h4>1. Datamark: Búsqueda de Anterioridades</h4>
+          <ul>
+            <li><strong>Base de Datos Actualizada Mensualmente:</strong> Almacenamos y estructuramos de forma sistemática todas las marcas publicadas en la Gaceta Oficial de Bolivia, migrando y clasificando la información mes a mes según su número de publicación oficial.</li>
+            <li><strong>Decisiones Estratégicas al Instante:</strong> Permite a los asesores legales y empresas obtener un diagnóstico inmediato de anterioridades antes de realizar el pago y la búsqueda formal ante el SENAPI.</li>
+            <li><strong>Motor de Búsqueda Mixta con IA:</strong> Ejecuta búsquedas profundas y simultáneas combinando criterios <em>fonéticos, silábicos, semánticos, naturales y por comparación de sílabas</em>.</li>
+          </ul>
+        </article>
+
+        <!-- Tarjeta 2: Datamark + IA Figurativa -->
+        <article class="tarjeta-modulo" data-categoria="ia-figurativa">
+          <h4>2. Datamark + IA: Reconocimiento Visual</h4>
+          <ul>
+            <li><strong>Repositorio Especializado de Logotipos:</strong> Almacena logotipos e isotipos de marcas registradas y publicadas en Bolivia.</li>
+            <li><strong>Búsqueda Figurativa con Inteligencia Artificial:</strong> Con tan solo cargar la imagen del logotipo de la empresa que se desea registrar, nuestra Inteligencia Artificial analiza formas, trazos y composiciones visuales.</li>
+            <li><strong>Prevención Gráfica Temprana:</strong> Detecta similitudes gráficas frente a marcas ya publicadas antes de iniciar trámites formales.</li>
+          </ul>
+        </article>
+
+        <!-- Tarjeta 3: IPMatic -->
+        <article class="tarjeta-modulo" data-categoria="ipmatic">
+          <h4>3. IPMatic: Gestión Integral de Propiedad Intelectual</h4>
+          <ul>
+            <li><strong>Automatización del Ciclo ante el SENAPI:</strong> Acompaña el llenado estructurado de formularios, seguimiento de publicación en la Gaceta Oficial y control hasta obtener el título de registro.</li>
+            <li><strong>Gestión de Contingencias, Oposiciones y Denegatorias:</strong> Módulos para apoderados, titulares y solicitantes actuando como <em>demandante</em> o <em>demandado</em>.</li>
+            <li><strong>Control de Plazos y Archivo Digital:</strong> Alertas oportunas para presentación de pruebas a oposiciones y carga de expedientes escaneados por caso.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- === [FUNCIONALIDAD JQUERY + RETO PRO JUEVES]: Cambio Dinámico de Temática y Acordeones === -->
+    <section class="seccion-card">
+      <div class="seccion-header">
+        <h2>Detalle de Capacidades Tecnológicas</h2>
+        <span class="seccion-subtitulo">Explora cada plataforma y sus módulos principales</span>
+      </div>
+
+      <!-- Contenedor con cambio dinámico de estilo corporativo y contenido mediante jQuery -->
+      <div id="panelTematico" class="panel-tematico tema-datamark">
+        <h3 id="tituloTema"><span id="iconoTema">🔍</span> Datamark — Vigilancia y Anterioridades</h3>
+        <p id="descTema">Plataforma avanzada de inteligencia de datos para obtener un diagnóstico inmediato sobre la viabilidad de registrar una marca antes de acudir al SENAPI.</p>
+        <div class="grupo-botones-tema">
+          <button class="btn-accion btn-tema-sistema btn-hidratable" data-hidratado="false" type="button" data-tema="datamark">🔍 Datamark</button>
+          <button class="btn-primario btn-tema-sistema btn-hidratable" data-hidratado="false" type="button" data-tema="ia">🧠 Datamark + IA</button>
+          <button class="btn-secundario btn-tema-sistema btn-hidratable" data-hidratado="false" type="button" data-tema="ipmatic">⚖️ IPMatic</button>
+        </div>
+      </div>
+
+      <!-- Acordeones jQuery (.slideToggle('fast')) -->
+      <div class="accordion-item">
+        <button class="accordion-btn btn-hidratable" data-hidratado="false" type="button">Búsquedas Mixtas con IA: Fonéticas, Silábicas, Semánticas y Naturales <span>▼</span></button>
+        <div class="accordion-panel">
+          Nuestro algoritmo ejecuta búsquedas profundas y simultáneas en toda la base de datos combinando criterios lingüísticos: <strong>búsquedas fonéticas y silábicas</strong> (detecta similitudes de sonido y estructura de sílabas para evitar confusión auditiva) junto con <strong>búsquedas semánticas y naturales</strong> (comprende el significado conceptual e identifica marcas similares en su idea o traducción).
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn btn-hidratable" data-hidratado="false" type="button">Reconocimiento Visual de Logotipos e Isotipos con IA <span>▼</span></button>
+        <div class="accordion-panel">
+          Con el simple hecho de subir el logotipo que tu empresa desea registrar, Datamark analiza formas, trazos geométricos y composiciones visuales frente al repositorio gráfico de marcas publicadas en la Gaceta Oficial de la República de Bolivia.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn btn-hidratable" data-hidratado="false" type="button">Gestión de Oposiciones, Denegatorias y Plazos ante el SENAPI <span>▼</span></button>
+        <div class="accordion-panel">
+          IPMatic empodera a apoderados legales, titulares y solicitantes del registro para administrar procesos complejos tanto como <strong>demandante</strong> (presentando oposiciones contra terceros) como <strong>demandado</strong> (defendiendo su solicitud frente a oposiciones o denegatorias), monitoreando cada cambio de estado procesal, plazos de presentación de pruebas y expedientes escaneados.
+        </div>
+      </div>
+    </section>
+
+    <!-- === [CONTENIDO PDF]: Tabla Comparativa "¿Por qué elegir el ecosistema Bition?" === -->
+    <section class="seccion-card">
+      <div class="seccion-header">
+        <h2>¿Por qué elegir el ecosistema Bition?</h2>
+        <span class="seccion-subtitulo">Ventajas clave para estudios jurídicos y departamentos legales</span>
+      </div>
+      <div class="tabla-responsive">
+        <table class="tabla-comparativa">
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>Beneficio para su firma o empresa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Especialización Local</strong></td>
+              <td>Software adaptado 100% a la normativa, tiempos y estructura de publicaciones del SENAPI y la Gaceta Oficial de Bolivia.</td>
+            </tr>
+            <tr>
+              <td><strong>Prevención de Riesgos</strong></td>
+              <td>La combinación de búsqueda textual y visual por IA reduce drásticamente las probabilidades de rechazo u oposición.</td>
+            </tr>
+            <tr>
+              <td><strong>Cero Vencimientos</strong></td>
+              <td>Trazabilidad total de estados procesales y alertas tempranas para la presentación de pruebas y descargos.</td>
+            </tr>
+            <tr>
+              <td><strong>Eficiencia Operativa</strong></td>
+              <td>Centralización de expedientes digitales y reducción de horas-hombre en tareas repetitivas de revisión y llenado de datos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- === [FUNCIONALIDAD FETCH ASÍNCRONO + LAZY LOADING + KEYUP + EVENT BUBBLING] === -->
+    <section id="buscador-ia" class="seccion-card">
+      <div class="seccion-header">
+        <h2>Buscador de Marcas — Gaceta Oficial de Bolivia</h2>
+        <span class="seccion-subtitulo">Consulta anterioridades con criterios fonéticos, silábicos, semánticos y figurativos</span>
+      </div>
+
+      <div class="form-grupo">
+        <label for="searchMarca">Buscar denominación, titular, número de gaceta o similitud fonética:</label>
+        <input type="text" id="searchMarca" class="form-control" placeholder="Ej: Datamark, Kuntur, Fonética, Gaceta 1682, Cloud...">
+      </div>
+
+      <div class="filtros-categoria">
+        <button class="btn-tactil btn-modo-ia btn-hidratable" data-hidratado="false" type="button" data-query="">Todas (15)</button>
+        <button class="btn-tactil btn-modo-ia btn-hidratable" data-hidratado="false" type="button" data-query="Fonética">Fonética</button>
+        <button class="btn-tactil btn-modo-ia btn-hidratable" data-hidratado="false" type="button" data-query="Silábica">Silábica</button>
+        <button class="btn-tactil btn-modo-ia btn-hidratable" data-hidratado="false" type="button" data-query="Semántica">Semántica</button>
+        <button class="btn-tactil btn-modo-ia btn-hidratable" data-hidratado="false" type="button" data-query="Figurativa">Figurativa IA</button>
+      </div>
+
+      <!-- Catálogo cargado desde data/marcas.json con imágenes loading="lazy" -->
+      <div id="catalogoMarcas" class="lista-marcas">
+        <p>Cargando marcas publicadas en la Gaceta Oficial...</p>
+      </div>
+    </section>
+
+    <!-- === [FUNCIONALIDAD ANTI-XSS + COLA BLINDADA + 4 PUNTOS CRÍTICOS UI] === -->
+    <section id="expedientes-senapi" class="seccion-card">
+      <div class="seccion-header">
+        <h2>IPMatic: Control de Trámites y Plazos ante el SENAPI</h2>
+        <span class="seccion-subtitulo">Seguimiento de solicitudes, oposiciones, denegatorias y expedientes escaneados</span>
+      </div>
+
+      <div class="grid-2-cols">
+        <!-- Mini-Bloque 1: Registro de Trámite Sanitizado (Prevención XSS con .text()) -->
+        <div>
+          <h3 style="margin-bottom: 8px; font-size: 17px;">Registrar Trámite o Contingencia</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px;">
+            Registra el titular o apoderado y selecciona la etapa procesal de la marca ante el SENAPI.
+          </p>
+          <form id="formReserva" novalidate>
+            <div class="form-grupo">
+              <label for="clienteNombre">Titular, Solicitante o Apoderado:</label>
+              <input type="text" id="clienteNombre" class="form-control" placeholder="Nombre de la empresa o titular" required>
+              <span id="errClienteNombre" class="error-msg">⚠️ Ingresa el nombre del titular, solicitante o apoderado.</span>
+            </div>
+            <div class="form-grupo">
+              <label for="salaSelect">Estado o Acción Procesal:</label>
+              <select id="salaSelect" class="form-control">
+                <option value="Solicitud de Registro (Formulario SENAPI)">Solicitud de Registro (Formulario SENAPI)</option>
+                <option value="Oposición como Demandante (Plazo Pruebas)">Oposición como Demandante (Plazo Pruebas)</option>
+                <option value="Defensa como Demandado (Contestación)">Defensa como Demandado (Contestación)</option>
+                <option value="Descargo ante Denegatoria de Registro">Descargo ante Denegatoria de Registro</option>
+                <option value="Archivo Digital — Expediente Escaneado">Archivo Digital — Expediente Escaneado</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-accion btn-hidratable" data-hidratado="false">Registrar en IPMatic</button>
+          </form>
+          <ul id="listaReservas" class="lista-segura"></ul>
+        </div>
+
+        <!-- Mini-Bloque 2: Cola de Seguimiento Blindada (44px, Truncado min-width: 0, Delegación .off().on()) -->
+        <div class="cola-expedientes">
+          <h3 style="margin-bottom: 8px; font-size: 17px;">Vigilancia de Expedientes y Plazos</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px;">
+            Añade expedientes o términos legales críticos para mantener un control oportuno de pruebas y descargos.
+          </p>
+          <div class="fila-inline-form">
+            <input type="text" id="inputCancion" class="form-control" placeholder="Ej: Expediente Oposición Marca X - Plazo 15 días...">
+            <button id="btnPedir" class="btn-tactil btn-hidratable" data-hidratado="false" type="button">+ Vigilar</button>
+          </div>
+          <span id="errInputCancion" class="error-msg" style="margin-top: -6px; margin-bottom: 8px;">⚠️ Escribe el expediente o plazo que deseas vigilar.</span>
+          <div id="listaCanciones"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === [FUNCIONALIDAD CALCULADOR + MODAL 30s + TOAST PRO] === -->
+    <section id="cotizador" class="seccion-card">
+      <div class="seccion-header">
+        <h2>Planes y Cotizador de Licencias</h2>
+        <span class="seccion-subtitulo">Calcula la inversión mensual para tu firma legal o departamento corporativo</span>
+      </div>
+
+      <div class="grid-2-cols">
+        <div>
+          <div class="form-grupo">
+            <label for="planTarifa">Plan Empresarial:</label>
+            <select id="planTarifa" class="form-control">
+              <option value="250">Estudio Jurídico / Agente PI (250 BOB / mes)</option>
+              <option value="400">Departamento Legal Empresarial (400 BOB / mes)</option>
+              <option value="650">Ecosistema Completo Datamark + IA + IPMatic (650 BOB / mes)</option>
+            </select>
+          </div>
+          <div class="form-grupo">
+            <label for="hrs">Meses de Suscripción:</label>
+            <input type="number" id="hrs" class="form-control" value="1" min="1" max="36">
+            <span id="errHrs" class="error-msg">⚠️ Ingresa una cantidad válida de meses (entre 1 y 36).</span>
+          </div>
+          <div class="form-grupo">
+            <label>Módulos Complementarios:</label>
+            <label style="font-weight: 400;"><input type="checkbox" class="extra-modulo" value="120" data-nombre="Búsqueda Figurativa IA"> Búsqueda Figurativa de Logotipos con IA (+120 BOB)</label>
+            <label style="font-weight: 400;"><input type="checkbox" class="extra-modulo" value="90" data-nombre="Alertas Plazos SENAPI"> Alertas de Plazos y Oposiciones SENAPI (+90 BOB)</label>
+            <label style="font-weight: 400;"><input type="checkbox" class="extra-modulo" value="70" data-nombre="Archivo Digital OCR"> Digitalización de Expedientes Escaneados (+70 BOB)</label>
+          </div>
+        </div>
+
+        <div>
+          <div class="resumen-total-box">
+            <p style="font-size: 13px; color: #cbd5e1;">Resumen de Inversión Estimada:</p>
+            <div style="margin: 8px 0;">
+              Total: <span id="total" class="monto-destacado">250</span> <span style="font-weight: 700;">BOB</span>
+            </div>
+            <p id="estadoExpirado" style="font-size: 12px; color: #bae6fd; display: none; margin-bottom: 8px;">
+              La reserva temporal de tarifa expiró. Presiona el botón para generar una nueva confirmación.
+            </p>
+            <button id="btnModal" class="btn-accion btn-hidratable" data-hidratado="false" type="button">Solicitar Cotización</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === [FUNCIONALIDAD BITÁCORA DE EVENTOS JS — DÍA 1 Y DÍA 2] === -->
+    <section id="actividad" class="seccion-card">
+      <div class="seccion-header">
+        <h2>Centro de Actividad y Órdenes de Servicio</h2>
+        <span class="seccion-subtitulo">Simulador de consultas rápidas sobre Gaceta Oficial y solicitudes de paquetes</span>
+      </div>
+
+      <div class="grid-2-cols">
+        <!-- Monitor interactivo (Delegación click, dblclick y keyup) -->
+        <div>
+          <div id="liveContainer" class="stream-box">
+            <p style="margin-bottom: 10px;">Monitor de Consultas — Gaceta Oficial &amp; SENAPI</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <button class="btn-accion btn-hidratable" data-hidratado="false" type="button" data-prod="Búsqueda Fonética Datamark">🔍 Consulta Fonética</button>
+              <button class="btn-primario btn-hidratable" data-hidratado="false" type="button" data-prod="Análisis Logotipo IA">🖼️ Escaneo Logo IA</button>
+              <button class="btn-secundario btn-hidratable" data-hidratado="false" type="button" data-prod="Alerta Plazo Oposición IPMatic">⚖️ Verificar Plazo</button>
+              <button class="btn-tactil btn-hidratable" data-hidratado="false" type="button" data-action="like">⭐ Marcar Prioridad</button>
+            </div>
+          </div>
+          <div class="form-grupo" style="margin-top: 10px;">
+            <label for="chatInput">Nota o Denominación a Monitorear:</label>
+            <input type="text" id="chatInput" class="form-control" placeholder="Escribe una marca o nota de seguimiento...">
+          </div>
+          <div id="logOutput" class="log-stream">
+            <div>[Bition] Centro de consultas listo para registrar movimientos...</div>
+          </div>
+        </div>
+
+        <!-- Orden Rápida (Eventos change y submit con preventDefault) -->
+        <div>
+          <div class="checkout-card">
+            <h3 style="margin-bottom: 10px; font-size: 16px;">Activación Rápida de Servicio</h3>
+            <form id="orderForm" novalidate>
+              <div class="form-grupo">
+                <label for="variantSelect">Modalidad de Servicio:</label>
+                <select id="variantSelect" class="form-control">
+                  <option value="Reporte Único Anterioridad IA - 150 BOB">Reporte Único Anterioridad IA - 150 BOB</option>
+                  <option value="Licencia Mensual Datamark + IPMatic - 650 BOB">Licencia Mensual Datamark + IPMatic - 650 BOB</option>
+                  <option value="Pack Estudio Jurídico Anual - 6500 BOB">Pack Estudio Jurídico Anual - 6500 BOB</option>
+                </select>
+              </div>
+              <div class="form-grupo">
+                <label for="userTikTok">Estudio Jurídico o Empresa Solicitante:</label>
+                <input type="text" id="userTikTok" class="form-control" placeholder="Ej: Estudio Jurídico Bolivia S.R.L." required>
+                <span id="errUserTikTok" class="error-msg" style="color: #fca5a5;">⚠️ Indica el nombre del estudio jurídico o empresa.</span>
+              </div>
+              <button type="submit" class="btn-accion btn-hidratable" data-hidratado="false">Registrar Solicitud</button>
+            </form>
+          </div>
+          <div id="logDia2" class="log-box">
+            <div>[Historial de Solicitudes] Sin solicitudes registradas aún.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === [FUNCIONALIDAD FORMULARIO CONTACTO + VALIDACIÓN EN TIEMPO REAL BLUR/INPUT] === -->
+    <section id="contacto" class="seccion-card">
+      <div class="seccion-header">
+        <h2>Contáctanos</h2>
+        <span class="seccion-subtitulo">Solicita una demostración personalizada de Datamark e IPMatic para tu empresa</span>
+      </div>
+
+      <div class="grid-2-cols">
+        <div>
+          <form id="pwaForm" novalidate>
+            <div class="form-grupo">
+              <label for="nombre">Nombre Completo o Estudio Jurídico:</label>
+              <input type="text" id="nombre" class="form-control" placeholder="Tu nombre o firma legal">
+              <span id="errNombre" class="error-msg">⚠️ Por favor, ingresa tu nombre o empresa.</span>
+            </div>
+            <div class="form-grupo">
+              <label for="correo">Correo Electrónico Corporativo:</label>
+              <input type="email" id="correo" class="form-control" placeholder="contacto@empresa.com.bo">
+              <span id="errCorreo" class="error-msg">⚠️ Ingresa un correo electrónico válido.</span>
+            </div>
+            <div class="form-grupo">
+              <label for="mensaje">Mensaje o Requerimiento:</label>
+              <textarea id="mensaje" class="form-control" rows="3" placeholder="Cuéntanos si necesitas búsqueda de anterioridades, IA visual o gestión de expedientes..."></textarea>
+              <span id="errMensaje" class="error-msg">⚠️ Describe brevemente tu consulta (mínimo 5 caracteres).</span>
+            </div>
+            <button type="submit" class="btn-primario btn-hidratable" data-hidratado="false">Enviar Solicitud</button>
+          </form>
+          <div id="successAlert" class="success-alert"></div>
+        </div>
+
+        <div class="item-card" style="margin-top: 0;">
+          <h3 style="margin-bottom: 10px; color: var(--primary-bition);">Bition S.R.L. — Bolivia</h3>
+          <p style="margin-bottom: 10px;">
+            Desde el <strong>26 de abril de 2017</strong> acompañamos a titulares de marcas, apoderados legales y estudios jurídicos en la modernización de sus procesos ante el <strong>SENAPI</strong>.
+          </p>
+          <ul style="padding-left: 18px; color: var(--text-muted); font-size: 14px;">
+            <li style="margin-bottom: 6px;">Migración mensual oficial de la Gaceta de Bolivia.</li>
+            <li style="margin-bottom: 6px;">Búsquedas mixtas y figurativas de logotipos con IA.</li>
+            <li style="margin-bottom: 6px;">Control de oposiciones, denegatorias y plazos procesales.</li>
+            <li>Acceso optimizado para computadora y dispositivo móvil.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- === [COMPONENTE MODAL UI]: Ventana Confirmatoria con Temporizador 30s (setInterval) === -->
+  <div id="modalReserva" class="modal-overlay">
+    <div class="modal-contenido">
+      <div class="modal-header">
+        <h3>Confirmar Solicitud — Bition S.R.L.</h3>
+        <button id="btnCerrarModal" class="btn-tactil btn-hidratable" data-hidratado="false" type="button" aria-label="Cerrar Ventana">✕</button>
+      </div>
+      <p style="font-size: 14px; margin-bottom: 12px;">Verifique los datos de su cotización antes de confirmar:</p>
+      <div class="item-card" style="margin-bottom: 14px;">
+        <div><strong>Servicio:</strong> <span id="modalDetalle">Estudio Jurídico / Agente PI</span></div>
+        <div><strong>Monto Estimado:</strong> <span id="modalMonto">250</span> BOB</div>
+        <div style="margin-top: 6px;">
+          <strong>Vigencia de Tarifa:</strong> <span id="timerCountdown" class="timer-badge">00:30</span>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button id="btnCancelarModal" class="btn-secundario btn-hidratable" data-hidratado="false" type="button">Cancelar</button>
+        <button id="btnProcesarModal" class="btn-accion btn-hidratable" data-hidratado="false" type="button">Confirmar Cotización</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- === [RETO UI NIVEL PRO]: Toast Alert Flotante (.slideDown -> 3s -> .fadeOut) === -->
+  <div id="toastAlert" class="toast-alert">
+    <strong>Bition S.R.L.</strong>
+    <p id="toastMsg" style="margin-top: 4px;">Operación confirmada correctamente.</p>
+  </div>
+
+  <footer class="footer-bition">
+    <p><strong>Bition S.R.L.</strong> — Software de Propiedad Intelectual en Bolivia • Fundada el 26 de abril de 2017</p>
+    <p style="font-size: 12px; color: #cbd5e1; margin-top: 6px;">
+      Datamark + IA &amp; IPMatic •
+      <a href="mobile.html" style="color: #38bdf8; text-decoration: none; font-weight: 600;">Abrir Versión para Celulares</a>
+    </p>
+  </footer>
+
+  <!-- === [FUNCIONALIDAD SCRIPTS Y REGISTRO SERVICE WORKER] === -->
+  <script src="script.js"></script>
+</body>
+</html>
