@@ -1,0 +1,167 @@
+[
+  {
+    "id": 101,
+    "marca": "DATAMARK + IA",
+    "titular": "Bition S.R.L.",
+    "claseNiza": "Clase 42 • Software como Servicio",
+    "gaceta": "Gaceta Oficial N° 1624",
+    "estado": "Registrada SENAPI",
+    "similitudFonetica": "Da-ta-mark / Datamarc / Data-Marq",
+    "tipoBusqueda": "Mixta (Fonética + Silábica + Semántica)",
+    "portada": "icons/logo-datamark.svg"
+  },
+  {
+    "id": 102,
+    "marca": "IPMATIC ERP",
+    "titular": "Bition S.R.L.",
+    "claseNiza": "Clase 42 • Gestión Propiedad Intelectual",
+    "gaceta": "Gaceta Oficial N° 1628",
+    "estado": "Registrada SENAPI",
+    "similitudFonetica": "I-Pi-Ma-Tic / IP-Matik",
+    "tipoBusqueda": "Denominativa + Control de Plazos",
+    "portada": "icons/logo-ipmatic.svg"
+  },
+  {
+    "id": 103,
+    "marca": "ANDES TECH BOLIVIA",
+    "titular": "Innovación Altiplano S.A.",
+    "claseNiza": "Clase 9 • Hardware y Aplicaciones",
+    "gaceta": "Gaceta Oficial N° 1680",
+    "estado": "Publicada (En Plazo de Oposición)",
+    "similitudFonetica": "An-des Tek / Andestec",
+    "tipoBusqueda": "Semántica y Natural",
+    "portada": "icons/logo-ia.svg"
+  },
+  {
+    "id": 104,
+    "marca": "ILLIMANI CLOUD",
+    "titular": "Soluciones La Paz Ltda.",
+    "claseNiza": "Clase 42 • Servicios en la Nube",
+    "gaceta": "Gaceta Oficial N° 1681",
+    "estado": "En Examen de Fondo",
+    "similitudFonetica": "I-lli-ma-ni Kloud / Nube Illimani",
+    "tipoBusqueda": "Semántica (Traducción Cloud/Nube)",
+    "portada": "icons/logo-gaceta.svg"
+  },
+  {
+    "id": 105,
+    "marca": "KUNTUR LOGÍSTICA",
+    "titular": "Transportes Cóndor S.R.L.",
+    "claseNiza": "Clase 39 • Transporte y Distribución",
+    "gaceta": "Gaceta Oficial N° 1682",
+    "estado": "Con Oposición Activa",
+    "similitudFonetica": "Kun-tur / Cuntur / Cóndor",
+    "tipoBusqueda": "Fonética + Figurativa (Isotipo Ave)",
+    "portada": "icons/logo-senapi.svg"
+  },
+  {
+    "id": 106,
+    "marca": "UYUNI SALT LABS",
+    "titular": "Cosmética Andina S.R.L.",
+    "claseNiza": "Clase 3 • Cuidado Personal",
+    "gaceta": "Gaceta Oficial N° 1683",
+    "estado": "Publicada en Gaceta",
+    "similitudFonetica": "U-yu-ni Salt / Salar Uyuni",
+    "tipoBusqueda": "Mixta (Silábica + Figurativa)",
+    "portada": "icons/logo-ia.svg"
+  },
+  {
+    "id": 107,
+    "marca": "TIWANAKU PAY",
+    "titular": "Fintech Bolivia S.A.",
+    "claseNiza": "Clase 36 • Servicios Financieros",
+    "gaceta": "Gaceta Oficial N° 1684",
+    "estado": "Registrada SENAPI",
+    "similitudFonetica": "Ti-wa-na-ku Pei / Tiahuanaco Pay",
+    "tipoBusqueda": "Fonética y Ortográfica",
+    "portada": "icons/logo-datamark.svg"
+  },
+  {
+    "id": 108,
+    "marca": "CHACALTAYA ENERGY",
+    "titular": "Energías Limpias del Sur",
+    "claseNiza": "Clase 4 • Energía Renovable",
+    "gaceta": "Gaceta Oficial N° 1685",
+    "estado": "Denegatoria en Revisión",
+    "similitudFonetica": "Cha-cal-ta-ya / Chacaltaia",
+    "tipoBusqueda": "Control Contingencias IPMatic",
+    "portada": "icons/logo-ipmatic.svg"
+  },
+  {
+    "id": 109,
+    "marca": "YUNGAS CAFÉ SELECTO",
+    "titular": "Agroexportadora Caranavi",
+    "claseNiza": "Clase 30 • Café y Alimentos",
+    "gaceta": "Gaceta Oficial N° 1686",
+    "estado": "Publicada en Gaceta",
+    "similitudFonetica": "Yun-gas Ka-fe / Café del Yunga",
+    "tipoBusqueda": "Búsqueda Figurativa IA (Logotipo)",
+    "portada": "icons/logo-gaceta.svg"
+  },
+  {
+    "id": 110,
+    "marca": "SAMAIPATA BIO",
+    "titular": "Laboratorios Valle Verde",
+    "claseNiza": "Clase 5 • Productos Farmacéuticos",
+    "gaceta": "Gaceta Oficial N° 1687",
+    "estado": "Alerta Plazo de Pruebas",
+    "similitudFonetica": "Sa-mai-pa-ta / Samaypata",
+    "tipoBusqueda": "Comparación de Sílabas",
+    "portada": "icons/logo-senapi.svg"
+  },
+  {
+    "id": 111,
+    "marca": "ORURO TEXTIL PRO",
+    "titular": "Textilería Real S.R.L.",
+    "claseNiza": "Clase 25 • Vestimenta",
+    "gaceta": "Gaceta Oficial N° 1688",
+    "estado": "Registrada SENAPI",
+    "similitudFonetica": "O-ru-ro Teks-til",
+    "tipoBusqueda": "Búsqueda Natural",
+    "portada": "icons/logo-datamark.svg"
+  },
+  {
+    "id": 112,
+    "marca": "TARIJA VINO DORADO",
+    "titular": "Bodegas del Valle S.A.",
+    "claseNiza": "Clase 33 • Bebidas y Vinos",
+    "gaceta": "Gaceta Oficial N° 1689",
+    "estado": "Expediente Digitalizado",
+    "similitudFonetica": "Ta-ri-ja Bi-no / Golden Wine",
+    "tipoBusqueda": "Semántica + Búsqueda Mixta",
+    "portada": "icons/logo-ipmatic.svg"
+  },
+  {
+    "id": 113,
+    "marca": "PANDO FORESTAL",
+    "titular": "Maderas Amazónicas Ltda.",
+    "claseNiza": "Clase 19 • Materiales de Construcción",
+    "gaceta": "Gaceta Oficial N° 1690",
+    "estado": "Publicada en Gaceta",
+    "similitudFonetica": "Pan-do Fo-res-tal",
+    "tipoBusqueda": "Reconocimiento Visual IA",
+    "portada": "icons/logo-ia.svg"
+  },
+  {
+    "id": 114,
+    "marca": "SUCRE LEGAL GUARD",
+    "titular": "Consorcio Jurídico Chuquisaca",
+    "claseNiza": "Clase 45 • Servicios Jurídicos PI",
+    "gaceta": "Gaceta Oficial N° 1691",
+    "estado": "Vigilancia Activa",
+    "similitudFonetica": "Su-kre Le-gal Gard",
+    "tipoBusqueda": "Control Demandante / Demandado",
+    "portada": "icons/logo-senapi.svg"
+  },
+  {
+    "id": 115,
+    "marca": "POTOSÍ DATA MINER",
+    "titular": "Ingeniería Minera Digital",
+    "claseNiza": "Clase 42 • Analítica de Datos",
+    "gaceta": "Gaceta Oficial N° 1692",
+    "estado": "Publicada en Gaceta",
+    "similitudFonetica": "Po-to-si Da-ta Mai-ner",
+    "tipoBusqueda": "Motor Mixto Completo IA",
+    "portada": "icons/logo-gaceta.svg"
+  }
+]
