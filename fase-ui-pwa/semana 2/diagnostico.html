@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#f97316">
+    <title>Analizador de Código PWA / DOM</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f172a;
+            color: #fff;
+            padding: 15px;
+            min-height: 100dvh;
+        }
+        .diagnostico-wrapper {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+        .nav-retorno {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .nav-link {
+            display: inline-block;
+            background: #1e293b;
+            color: #f8fafc;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            border-bottom: 2px solid #f97316;
+            font-size: 13px;
+            font-weight: 600;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .nav-link:hover {
+            background: #334155;
+            color: #f97316;
+        }
+        .box {
+            background: #1e293b;
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-top: 3px solid #f97316;
+        }
+        h2 {
+            color: #f97316;
+            margin-bottom: 6px;
+        }
+        .subtitulo-diag {
+            font-size: 12px;
+            color: #cbd5e1;
+            margin-bottom: 12px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            background: #0f172a;
+            color: #fde047;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 13px;
+            margin-bottom: 12px;
+            resize: vertical;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+        }
+        .btn {
+            background: #f97316;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .btn:hover {
+            background: #ea580c;
+        }
+        .btn-secundario {
+            background: #334155;
+            margin-left: 8px;
+        }
+        .btn-secundario:hover {
+            background: #475569;
+        }
+        .result {
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+        }
+        .badge-danger {
+            background: #ef4444;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .badge-success {
+            background: #22c55e;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .detalles-reporte {
+            font-size: 13px;
+            margin: 10px 0 14px 0;
+            line-height: 1.5;
+        }
+        .titulo-sugerido {
+            color: #f97316;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <main class="diagnostico-wrapper">
+        <nav class="nav-retorno" aria-label="Navegación rápida">
+            <a href="index.html" class="nav-link">🏠 Volver al Portafolio PWA</a>
+            <a href="lab-jquery/index.html" class="nav-link">🎤 Ir a Lab jQuery (Karaoke PWA)</a>
+        </nav>
+
+        <section class="box">
+            <h2>🔍 Diagnóstico de Código PWA &amp; Bloqueos DOM</h2>
+            <p class="subtitulo-diag">
+                Pega tu código HTML/CSS abajo para detectar clases bloqueadas por Brave/Opera o ineficiencias de viewport y memoria:
+            </p>
+            <textarea id="codigoInput" placeholder="Pega aquí tu código HTML/CSS..."></textarea>
+            <div>
+                <button class="btn" id="btnAnalizar" type="button">Analizar y Optimizar Código</button>
+                <button class="btn btn-secundario" id="btnLimpiar" type="button">Limpiar</button>
+            </div>
+        </section>
+
+        <section id="panelResultado" class="box result">
+            <h3>Informe de Diagnóstico y Viabilidad:</h3>
+            <div id="detallesReporte" class="detalles-reporte"></div>
+            <h4 class="titulo-sugerido">Código Sugerido / Optimizado:</h4>
+            <textarea id="codigoSugerido" readonly></textarea>
+        </section>
+    </main>
+
+    <script>
+        $(document).ready(function() {
+            $('#btnAnalizar').off('click').on('click', function() {
+                var src = $('#codigoInput').val();
+                if (!src.trim()) {
+                    alert('Por favor pega algún código HTML o CSS para analizar.');
+                    return;
+                }
+
+                var hallazgos = [];
+                var limpio = src;
+
+                // 1. Detección de nombres de clases bloqueadas por Brave / Opera
+                var clasesBloqueo = [/ad-banner/gi, /promo-box/gi, /social-ads/gi, /analytics/gi, /tracker/gi];
+                clasesBloqueo.forEach(function(regex) {
+                    if (regex.test(src)) {
+                        hallazgos.push(
+                            '<span class="badge-danger">BLOQUEO GRAVE</span> Detectada clase sospechosa ' +
+                            regex.source + ' (Brave/Opera la ocultarán). Reemplazar por .seccion-destacada o nombre semántico.'
+                        );
+                        limpio = limpio.replace(regex, 'seccion-destacada');
+                    }
+                });
+
+                // 2. Detección de Viewport rígido (100vh)
+                if (/100vh/gi.test(src) && !/min-height\s*:\s*100dvh/gi.test(src)) {
+                    hallazgos.push(
+                        '<span class="badge-danger">DESBORDAMIENTO</span> Se detectó 100vh rígido. Reemplazar por min-height: 100dvh.'
+                    );
+                    limpio = limpio.replace(/height\s*:\s*100vh\s*;?/gi, 'min-height: 100dvh;');
+                    limpio = limpio.replace(/100vh/gi, '100dvh');
+                }
+
+                // 3. Verificación básica de limpieza de eventos en delegación jQuery
+                if (/\$\(\s*document\s*\)\.on\(/gi.test(src) && !/\.off\(/gi.test(src)) {
+                    hallazgos.push(
+                        '<span class="badge-danger">MEMORY LEAK</span> Se detectó $(document).on(...) sin limpieza previa con .off().'
+                    );
+                }
+
+                // 4. Evaluación de Viabilidad
+                var viabilidad = hallazgos.length <= 2
+                    ? '<span class="badge-success">CÓDIGO RESCATABLE</span> Aplica los cambios sugeridos abajo.'
+                    : '<span class="badge-danger">REFACTORIZAR</span> Demasiadas inconsistencias, conviene rehacer la maquetación.';
+
+                var htmlReporte = '<p><strong>Dictamen:</strong> ' + viabilidad + '</p><ul style="padding-left:20px; margin-top:8px;">';
+                hallazgos.forEach(function(h) {
+                    htmlReporte += '<li style="margin-bottom:6px;">' + h + '</li>';
+                });
+                if (hallazgos.length === 0) {
+                    htmlReporte += '<li><span class="badge-success">EXCELENTE</span> No se encontraron nombres de clases bloqueables ni errores de viewport.</li>';
+                }
+                htmlReporte += '</ul>';
+
+                $('#detallesReporte').html(htmlReporte);
+                $('#codigoSugerido').val(limpio);
+                $('#panelResultado').slideDown();
+            });
+
+            $('#btnLimpiar').off('click').on('click', function() {
+                $('#codigoInput').val('');
+                $('#codigoSugerido').val('');
+                $('#detallesReporte').empty();
+                $('#panelResultado').slideUp();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,480 @@
+/* ==========================================================================
+   1. ESTILOS BASE Y CONFIGURACIÓN PWA (Adaptable Móvil / Tablet / PC)
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f1f5f9;
+    color: #1e293b;
+    line-height: 1.6;
+    padding: 10px;
+    min-height: 100dvh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Soporte Modo Oscuro (Base Semana 1) */
+body.dark-mode {
+    background-color: #020617;
+    color: #e2e8f0;
+}
+
+body.dark-mode .pwa-container {
+    background: #0f172a;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+
+body.dark-mode .filter-section,
+body.dark-mode .catalog-section,
+body.dark-mode .contact-section,
+body.dark-mode .bitacora-section {
+    background: #1e293b;
+    border-color: #334155;
+    color: #f1f5f9;
+}
+
+body.dark-mode .filter-section h3,
+body.dark-mode .catalog-section h3,
+body.dark-mode .contact-section h3,
+body.dark-mode .bitacora-section h3,
+body.dark-mode label {
+    color: #f8fafc;
+}
+
+body.dark-mode .item-card,
+body.dark-mode .tarjeta-item,
+body.dark-mode .card-acceso {
+    background: #0f172a;
+    color: #cbd5e1;
+    border-color: #334155;
+}
+
+body.dark-mode select,
+body.dark-mode input,
+body.dark-mode textarea {
+    background: #0f172a;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+/* Barra superior de aviso y estado de red */
+.top-status-bar {
+    max-width: 768px;
+    margin: 0 auto 8px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.pwa-notice {
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+body.dark-mode .pwa-notice {
+    color: #94a3b8;
+}
+
+.network-badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+/* Contenedor principal optimizado para vistas móviles/tablet */
+.pwa-container {
+    max-width: 768px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border-top: 4px solid #f97316;
+}
+
+header {
+    background: #0f172a;
+    color: #fff;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 2px solid #f97316;
+}
+
+.brand-subtitle {
+    color: #cbd5e1;
+    font-size: 12px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-theme {
+    background: #1e293b;
+    color: #f8fafc;
+    border: 1px solid #475569;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.btn-theme:hover {
+    border-color: #f97316;
+    background: #334155;
+}
+
+/* ==========================================================================
+   2. MENÚ HAMBURGUESA Y ESTADO DE HIDRATACIÓN SSR
+   ========================================================================== */
+.menu-toggle {
+    background: none;
+    border: 1px solid transparent;
+    color: #f97316;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.menu-toggle.btn-estatico {
+    font-size: 12px;
+    color: #cbd5e1;
+    border-color: #475569;
+    cursor: wait;
+}
+
+.nav-menu {
+    display: none;
+    background: #1e293b;
+    padding: 10px 20px;
+    border-bottom: 1px solid #334155;
+}
+
+.nav-menu ul {
+    list-style: none;
+}
+
+.nav-menu ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-menu ul li:last-child {
+    border-bottom: none;
+}
+
+.nav-menu ul li a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    transition: color 0.2s;
+}
+
+.nav-menu ul li a:hover {
+    color: #f97316;
+}
+
+.content {
+    padding: 20px;
+}
+
+/* ==========================================================================
+   3. ACCESOS RÁPIDOS DE SEMANA 2
+   ========================================================================== */
+.accesos-modulo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.card-acceso {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #0f172a;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #1e293b;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card-acceso:hover {
+    transform: translateY(-2px);
+    border-left-color: #f97316;
+}
+
+.card-acceso-principal {
+    border-left-color: #f97316;
+}
+
+.card-acceso strong {
+    font-size: 14px;
+}
+
+.card-acceso span {
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* ==========================================================================
+   4. FILTRO DE 3 CAPAS Y CATÁLOGO DOM
+   ========================================================================== */
+.filter-section,
+.catalog-section {
+    margin-bottom: 22px;
+    background: #fafafa;
+    padding: 18px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #0f172a;
+}
+
+.filter-section h3,
+.catalog-section h3,
+.contact-section h3,
+.bitacora-section h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #0f172a;
+}
+
+select,
+input,
+textarea {
+    width: 100%;
+    padding: 11px;
+    margin-bottom: 6px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+/* Matiz naranja serio en el enfoque (Focus) de campos */
+select:focus,
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #f97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+}
+
+.item-card {
+    background: #fff;
+    border-left: 4px solid #f97316;
+    padding: 12px 15px;
+    margin-top: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    font-size: 14px;
+    color: #334155;
+    border-radius: 4px;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.btn-filtro-dom {
+    padding: 7px 12px;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #0f172a;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-filtro-dom.active,
+.btn-filtro-dom:hover {
+    background: #0f172a;
+    color: #fff;
+    border-color: #f97316;
+}
+
+.tarjetas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+}
+
+.tarjeta-item {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #f97316;
+    border-radius: 6px;
+    padding: 12px;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+}
+
+.tarjeta-item:hover {
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.tarjeta-item h4 {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.tarjeta-item p {
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* ==========================================================================
+   5. FORMULARIO DE CONTACTO Y BITÁCORA
+   ========================================================================== */
+.contact-section {
+    background: #fff;
+    padding: 18px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #f97316;
+    margin-bottom: 22px;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #475569;
+}
+
+.error-msg {
+    color: #dc2626;
+    font-size: 12px;
+    display: none;
+    margin-top: 3px;
+    font-weight: 500;
+}
+
+button.submit-btn {
+    background: #0f172a;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid #f97316;
+    transition: background 0.2s;
+}
+
+button.submit-btn:hover {
+    background: #1e293b;
+}
+
+.success-alert {
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    display: none;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.offline-alert {
+    background: #ffedd5;
+    color: #9a3412;
+    border: 1px solid #fdba74;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    display: none;
+    font-size: 13px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.bitacora-section {
+    background: #fafafa;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #0f172a;
+}
+
+.bitacora-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.bitacora-header h3 {
+    margin-bottom: 0;
+}
+
+.btn-like-portafolio {
+    background: #ec4899;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.log-stream {
+    background: #020617;
+    color: #38bdf8;
+    padding: 10px;
+    border-radius: 6px;
+    max-height: 150px;
+    overflow-y: auto;
+    font-family: monospace;
+    font-size: 12px;
+}
+
+.log-stream div {
+    padding: 2px 0;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+}
+
+@media (min-width: 1025px) {
+    body {
+        background-color: #e2e8f0;
+    }
+}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- Meta viewport indispensable para PWA y adaptabilidad en móviles y tablets -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#f97316">
+    <title>MACR - Portafolio y Presentación Personal (PWA)</title>
+
+    <!-- Web App Manifest para instalación PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Enlace a jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <div class="top-status-bar">
+        <div class="pwa-notice">📱 Vista Simulada PWA (Optimizado para Celular y Tablet)</div>
+        <div id="estadoRed" class="network-badge" role="status" aria-live="polite">🟢 En Línea</div>
+    </div>
+
+    <div class="pwa-container">
+        <!-- CABECERA, HIDRATACIÓN SSR Y MENÚ HAMBURGUESA -->
+        <header>
+            <div class="brand-header">
+                <h2>Ing. MACR</h2>
+                <small class="brand-subtitle">Portafolio PWA Oficial — Diseño Web II</small>
+            </div>
+            <div class="header-actions">
+                <!-- Botón Modo Oscuro / Claro (Base Semana 1) -->
+                <button type="button" id="themeBtn" class="btn-theme" title="Alternar Modo Oscuro">🌓 Oscuro</button>
+                <!-- Contenedor de Simulación de Hidratación SSR -->
+                <div id="contenedorMenu" data-hidratado="false">
+                    <button id="hamburgerBtn" class="menu-toggle btn-estatico" type="button" aria-label="Abrir menú de navegación">Cargando...</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Menú desplegable animado con jQuery -->
+        <nav class="nav-menu" id="navMenu" aria-label="Menú principal">
+            <ul>
+                <li><a href="#filtros">🔍 Filtro de 3 Capas</a></li>
+                <li><a href="#catalogo-dom">🧩 Catálogo de Proyectos (DOM)</a></li>
+                <li><a href="#contacto">✉️ Formulario y Contacto</a></li>
+                <li><a href="#bitacora-sec">📊 Bitácora de Eventos</a></li>
+                <li><a href="lab-jquery/index.html">🎤 Lab jQuery: Karaoke PWA &amp; UI</a></li>
+                <li><a href="diagnostico.html">🛠️ Diagnóstico PWA / DOM</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <!-- ACCESOS RÁPIDOS DE SEMANA 2 -->
+            <section class="accesos-modulo" aria-label="Accesos a módulos de la Semana 2">
+                <a href="lab-jquery/index.html" class="card-acceso card-acceso-principal">
+                    <strong>🎤 Abrir Proyecto Lab jQuery (Karaoke PWA)</strong>
+                    <span>Maquetación UI 4 Componentes, Acordeones, Calculador, Modal 30s y Catálogo Fetch</span>
+                </a>
+                <a href="diagnostico.html" class="card-acceso">
+                    <strong>🛠️ Analizador de Código PWA</strong>
+                    <span>Detector de bloqueos Brave/Opera, viewport rígido y Memory Leaks</span>
+                </a>
+            </section>
+
+            <!-- SECCIÓN 1: FILTRO DINÁMICO DE 3 CAPAS -->
+            <section id="filtros" class="filter-section">
+                <h3>🔍 Filtro Dinámico de 3 Capas</h3>
+
+                <!-- Capa 1 -->
+                <div class="form-group">
+                    <label for="capa1">Capa 1: Seleccione Área</label>
+                    <select id="capa1">
+                        <option value="">-- Elija Área --</option>
+                        <option value="academico">Académico (UPDS)</option>
+                        <option value="desarrollo">Desarrollo Software</option>
+                    </select>
+                </div>
+
+                <!-- Capa 2 -->
+                <div class="form-group">
+                    <label for="capa2">Capa 2: Seleccione Módulo</label>
+                    <select id="capa2" disabled>
+                        <option value="">-- Primero elija el área --</option>
+                    </select>
+                </div>
+
+                <!-- Capa 3 -->
+                <div class="form-group">
+                    <label>Capa 3: Elemento Filtrado</label>
+                    <div id="resultadoFiltro" class="item-card">Seleccione las capas anteriores...</div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2: FILTRADO DE PROYECTOS (BASE SEMANA 1 - DOM & DATASET) -->
+            <section id="catalogo-dom" class="catalog-section">
+                <h3>🧩 Portafolio de Prácticas (Semana 1 + Semana 2)</h3>
+                <div class="filter-buttons" role="group" aria-label="Filtrar proyectos por categoría">
+                    <button type="button" class="btn-filtro-dom active" data-filter="todos">Todos</button>
+                    <button type="button" class="btn-filtro-dom" data-filter="web">DOM / UI</button>
+                    <button type="button" class="btn-filtro-dom" data-filter="pwa">PWA Offline</button>
+                    <button type="button" class="btn-filtro-dom" data-filter="eventos">Eventos</button>
+                </div>
+
+                <div class="tarjetas-grid" id="gridProyectos">
+                    <article class="tarjeta-item" data-categoria="eventos">
+                        <h4>📊 Bitácora TikTok Live (Día 1 &amp; 2)</h4>
+                        <p>Delegación por Event Bubbling y captura de eventos click, keyup, change y submit.</p>
+                    </article>
+                    <article class="tarjeta-item" data-categoria="web">
+                        <h4>🎛️ Maquetación UI &amp; Efectos jQuery</h4>
+                        <p>Acordeones .slideToggle(), calculador en tiempo real y ventana modal con temporizador.</p>
+                    </article>
+                    <article class="tarjeta-item" data-categoria="pwa">
+                        <h4>📡 Arquitectura PWA Offline-First</h4>
+                        <p>Manifest, Service Worker con Cache Storage API y cola local de sincronización.</p>
+                    </article>
+                    <article class="tarjeta-item" data-categoria="pwa">
+                        <h4>🎤 K-Music Karaoke PWA</h4>
+                        <p>Consumo asíncrono Fetch API de 16 canciones, Lazy Loading y prevención de Memory Leaks.</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 3: FORMULARIO DE CONTACTO CON VALIDACIÓN JQUERY Y COLA OFFLINE -->
+            <section id="contacto" class="contact-section">
+                <h3>✉️ Formulario de Contacto Profesional</h3>
+
+                <div class="success-alert" id="successAlert">
+                    ¡Mensaje validado y enviado correctamente! Nos pondremos en contacto pronto.
+                </div>
+                <div class="offline-alert" id="offlineAlert">
+                    🟠 Guardado localmente - Pendiente de envío (se sincronizará automáticamente al recuperar la red).
+                </div>
+
+                <form id="pwaForm" novalidate>
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo:</label>
+                        <input type="text" id="nombre" placeholder="Ej. Juan Pérez">
+                        <div class="error-msg" id="errNombre">El nombre es obligatorio.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="correo">Correo Electrónico:</label>
+                        <input type="email" id="correo" placeholder="correo@ejemplo.com">
+                        <div class="error-msg" id="errCorreo">Ingrese un correo electrónico válido.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje o Requerimiento:</label>
+                        <textarea id="mensaje" rows="3" placeholder="Escriba su consulta aquí..."></textarea>
+                        <div class="error-msg" id="errMensaje">El mensaje no puede estar vacío.</div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Enviar Mensaje</button>
+                </form>
+            </section>
+
+            <!-- SECCIÓN 4: BITÁCORA DE EVENTOS EN TIEMPO REAL (BASE SEMANA 1) -->
+            <section id="bitacora-sec" class="bitacora-section">
+                <div class="bitacora-header">
+                    <h3>📊 Bitácora de Eventos del Portafolio</h3>
+                    <button type="button" id="btnLikePortafolio" class="btn-like-portafolio">❤️ Reaccionar (<span id="likeCounter">0</span>)</button>
+                </div>
+                <div id="logOutput" class="log-stream">
+                    <div>[Sistema] Portafolio PWA iniciado. Esperando hidratación e interacciones...</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Detección de Dispositivo Móvil / Tablet (Guía Técnica PWA)
+        if (window.innerWidth <= 768 || /Android|iPhone|iPad/i.test(navigator.userAgent)) {
+            console.log("Dispositivo Móvil o Tablet Detectado: Cargando Modo PWA");
+        }
+
+        // Registro del Service Worker para soporte Offline-First
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker PWA Registrado con Éxito:', reg.scope))
+                    .catch(err => console.error('Fallo en Registro de SW:', err));
+            });
+        }
+    </script>
+</body>
+</html>
