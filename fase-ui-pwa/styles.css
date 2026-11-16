@@ -1,0 +1,1656 @@
+/* ============================================================================
+   HOJA DE ESTILOS CORPORATIVA — BITION S.R.L. (index.html y mobile.html)
+   Diseño Web II • UPDS Sede La Paz • Ingeniería de Sistemas
+   Estética visual alineada a bition.com.bo:
+   - Azul Corporativo Profundo (#0a2540), Azul Datamark (#0066cc),
+     Cian IA (#0ea5e9 / #38bdf8), Verde Azulado IPMatic (#0d9488)
+   - Fondo limpio empresarial (#f8fafc / #ffffff) y soporte Dark Mode
+   - Compatibilidad Cross-Browser (Brave / Opera): Sin clases bloqueables
+   ============================================================================ */
+
+/* === [FUNCIONALIDAD BASE]: Variables CSS y Reseteo Global === */
+:root {
+  --primary-bition: #0a2540;
+  --blue-datamark: #0066cc;
+  --cyan-ia: #0ea5e9;
+  --cyan-light: #38bdf8;
+  --teal-ipmatic: #0d9488;
+  --bg-body: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-soft: #f1f5f9;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --border-color: #e2e8f0;
+  --accent-green: #16a34a;
+  --accent-red: #dc2626;
+  --shadow-card: 0 6px 24px rgba(10, 37, 64, 0.06);
+  --radius-lg: 14px;
+  --radius-md: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  min-height: 100dvh; /* Punto Crítico #1: Evita aplastamiento al abrir el teclado virtual en móviles */
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.6;
+}
+
+/* === [FUNCIONALIDAD DOM 1]: Modo Oscuro / Claro Dinámico (body.dark-mode) === */
+body.dark-mode {
+  --bg-body: #061222;
+  --bg-card: #0c1c33;
+  --bg-soft: #13294b;
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1;
+  --border-color: #1e3a5f;
+  --shadow-card: 0 8px 28px rgba(0, 0, 0, 0.45);
+}
+
+body.dark-mode .navbar-bition {
+  background: #081526;
+  border-bottom-color: #1e3a5f;
+}
+
+body.dark-mode .brand-texto h1,
+body.dark-mode .brand-texto h2,
+body.dark-mode .nav-links-desktop a {
+  color: #f8fafc;
+}
+
+body.dark-mode .brand-texto small {
+  color: var(--cyan-light);
+}
+
+body.dark-mode .menu-toggle {
+  color: #f8fafc;
+  border-color: #334155;
+  background: #13294b;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background-color: #13294b;
+  color: #f8fafc;
+  border-color: #2c4c7c;
+}
+
+body.dark-mode .tabla-comparativa th {
+  background-color: #00529b;
+}
+
+body.dark-mode .tabla-comparativa tr:nth-child(even) {
+  background-color: #13294b;
+}
+
+/* === [FUNCIONALIDAD FOCUS & VALIDACIÓN EN TIEMPO REAL]: Estados Visuales === */
+select:focus,
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--blue-datamark);
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.18);
+}
+
+.form-control.input-invalido {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+.form-control.input-valido {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.14);
+}
+
+/* === [FUNCIONALIDAD DETECCIÓN MÓVIL]: Banner Sugerencia Vista Celular === */
+.banner-deteccion-movil {
+  display: none;
+  background: var(--primary-bition);
+  color: #ffffff;
+  padding: 10px 16px;
+  font-size: 13px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 2px solid var(--cyan-ia);
+}
+
+.banner-deteccion-movil.visible {
+  display: flex;
+}
+
+/* === [FUNCIONALIDAD NAVBAR & MENU HAMBURGUESA]: Cabecera Limpia Estilo bition.com.bo === */
+.navbar-bition {
+  background: #ffffff;
+  color: var(--primary-bition);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  box-shadow: 0 2px 12px rgba(10, 37, 64, 0.05);
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.brand-bition {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--primary-bition);
+}
+
+.brand-bition img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.brand-texto h1,
+.brand-texto h2 {
+  font-size: 19px;
+  letter-spacing: 0.3px;
+  color: var(--primary-bition);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.brand-texto small {
+  color: var(--blue-datamark);
+  font-size: 11px;
+  font-weight: 600;
+  display: block;
+}
+
+.nav-links-desktop {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  list-style: none;
+}
+
+.nav-links-desktop a {
+  color: #334155;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.nav-links-desktop a:hover {
+  color: var(--blue-datamark);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* === [FUNCIONALIDAD PWA RED]: Indicador de Conexión === */
+.estado-red-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #065f46;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+}
+
+/* Botón Hamburguesa y Menú Desplegable */
+.menu-toggle {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: var(--primary-bition);
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 6px 12px;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-menu {
+  display: none;
+  background: var(--primary-bition);
+  padding: 12px 20px;
+  border-top: 2px solid var(--cyan-ia);
+}
+
+.nav-menu.show {
+  display: block;
+}
+
+.nav-menu ul {
+  list-style: none;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-menu ul li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-menu ul li a {
+  color: #e2e8f0;
+  text-decoration: none;
+  font-size: 14px;
+  display: block;
+}
+
+.nav-menu ul li a:hover {
+  color: var(--cyan-light);
+}
+
+/* === [FUNCIONALIDAD BOTONES TÁCTILES]: Punto Crítico #2 (>= 44x44px y gap >= 8px) === */
+.btn-tactil,
+.btn-accion,
+.btn-primario,
+.btn-secundario {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-tactil:hover,
+.btn-accion:hover,
+.btn-primario:hover,
+.btn-secundario:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+}
+
+.btn-primario {
+  background: linear-gradient(135deg, #0066cc, #0a2540);
+  color: #ffffff;
+}
+
+.btn-accion {
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  color: #ffffff;
+}
+
+.btn-secundario {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+body.dark-mode .btn-secundario {
+  background: #1e3a5f;
+  color: #f8fafc;
+}
+
+.btn-tactil {
+  background: #0a2540;
+  color: #ffffff;
+  border-bottom: 2px solid var(--cyan-light);
+}
+
+.btn-cambio-vista {
+  background: #0a2540;
+  color: #ffffff;
+  min-height: 44px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* === [FUNCIONALIDAD HERO PORTAL BITION.COM.BO]: Fondo Corporativo y Tarjetas de Acceso === */
+.desktop-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+.hero-bition {
+  background-color: #0a2540;
+  background-image:
+    linear-gradient(135deg, rgba(10, 37, 64, 0.93) 0%, rgba(0, 82, 155, 0.87) 100%),
+    url('https://www.bition.com.bo/lib/datamark-bg.png');
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 44px 36px;
+  margin-bottom: 28px;
+  box-shadow: 0 14px 34px rgba(10, 37, 64, 0.18);
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 32px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(56, 189, 248, 0.16);
+  color: #e0f2fe;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.hero-bition h2 {
+  font-size: 32px;
+  line-height: 1.22;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+.hero-bition p {
+  color: #e2e8f0;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hero-ecosistema-cards {
+  display: grid;
+  gap: 14px;
+}
+
+.hero-mini-card {
+  background: rgba(255, 255, 255, 0.96);
+  color: #0f172a;
+  border-left: 4px solid var(--blue-datamark);
+  padding: 16px 18px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease;
+}
+
+.hero-mini-card:hover {
+  transform: translateY(-2px);
+}
+
+.hero-mini-card.card-ia {
+  border-left-color: var(--cyan-ia);
+}
+
+.hero-mini-card.card-ipmatic {
+  border-left-color: var(--teal-ipmatic);
+}
+
+.hero-mini-card h3 {
+  font-size: 16px;
+  color: var(--primary-bition);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-mini-card p {
+  font-size: 13px;
+  margin-bottom: 0;
+  color: #475569;
+}
+
+.pill-plataforma {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: #e0f2fe;
+  color: #0369a1;
+  font-weight: 700;
+}
+
+/* === [FUNCIONALIDAD SECCIONES]: Tarjetas Limpias Corporativas === */
+.seccion-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.seccion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--bg-soft);
+}
+
+.seccion-header h2,
+.seccion-header h3 {
+  font-size: 21px;
+  color: var(--primary-bition);
+  font-weight: 700;
+}
+
+body.dark-mode .seccion-header h2,
+body.dark-mode .seccion-header h3 {
+  color: var(--cyan-light);
+}
+
+.seccion-subtitulo {
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.grid-2-cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.grid-3-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* === [FUNCIONALIDAD TEMÁTICA DINÁMICA Y ACORDEONES]: Explorador de Plataformas === */
+.panel-tematico {
+  padding: 22px;
+  border-radius: 12px;
+  color: #ffffff;
+  transition: background 0.35s ease;
+  margin-bottom: 18px;
+}
+
+.panel-tematico.tema-datamark {
+  background: linear-gradient(135deg, #0a2540 0%, #00529b 100%);
+}
+
+.panel-tematico.tema-ia {
+  background: linear-gradient(135deg, #0c2d48 0%, #0284c7 65%, #0ea5e9 100%);
+}
+
+.panel-tematico.tema-ipmatic {
+  background: linear-gradient(135deg, #0a2540 0%, #0f766e 100%);
+}
+
+.grupo-botones-tema {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.accordion-item {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.accordion-btn {
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  background: var(--bg-soft);
+  color: var(--text-main);
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  min-height: 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-panel {
+  display: none;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* === [FUNCIONALIDAD DOM 2]: Filtrado de Tarjetas de Servicios === */
+.filtros-categoria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tarjeta-modulo {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-color);
+  border-top: 4px solid var(--blue-datamark);
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.tarjeta-modulo[data-categoria="ia-figurativa"] {
+  border-top-color: var(--cyan-ia);
+}
+
+.tarjeta-modulo[data-categoria="ipmatic"] {
+  border-top-color: var(--teal-ipmatic);
+}
+
+.tarjeta-modulo h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--text-main);
+}
+
+.tarjeta-modulo ul {
+  padding-left: 18px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.tarjeta-modulo li {
+  margin-bottom: 8px;
+}
+
+/* Tabla Comparativa "¿Por qué elegir el ecosistema Bition?" */
+.tabla-responsive {
+  overflow-x: auto;
+}
+
+.tabla-comparativa {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tabla-comparativa th,
+.tabla-comparativa td {
+  padding: 13px 16px;
+  border: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.tabla-comparativa th {
+  background: var(--primary-bition);
+  color: #ffffff;
+}
+
+.tabla-comparativa tr:nth-child(even) {
+  background: var(--bg-soft);
+}
+
+/* === [FUNCIONALIDAD BUSCADOR FIGURATIVO IA]: Campos y Resultados === */
+.form-grupo {
+  margin-bottom: 12px;
+}
+
+.form-grupo label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-size: 14px;
+}
+
+.item-card {
+  background: var(--bg-soft);
+  border-left: 4px solid var(--blue-datamark);
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* === [FUNCIONALIDAD CATÁLOGO GACETA OFICIAL]: Fetch + Lazy Loading === */
+.lista-marcas {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  max-height: 460px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.tarjeta-pista {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+
+.tarjeta-pista img {
+  border-radius: 8px;
+  flex-shrink: 0;
+  background: #0a2540;
+}
+
+.info-pista {
+  flex: 1;
+  min-width: 0; /* Punto Crítico #3: Necesario para truncamiento limpio dentro de Flexbox */
+}
+
+.info-pista h4,
+.info-pista p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info-pista h4 {
+  font-size: 14px;
+}
+
+.info-pista p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Buscador Figurativo de Logotipos con IA */
+.zona-logo-ia {
+  border: 2px dashed var(--cyan-ia);
+  border-radius: 10px;
+  padding: 16px;
+  background: var(--bg-soft);
+  text-align: center;
+}
+
+.preview-logo-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.preview-logo-box img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: #ffffff;
+  padding: 4px;
+}
+
+/* === [FUNCIONALIDAD CONTROL DE TRÁMITES Y PLAZOS SENAPI]: Puntos Críticos UI === */
+.cola-expedientes {
+  padding: 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  overflow-x: hidden;
+}
+
+.fila-inline-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.fila-inline-form input {
+  flex: 1;
+  min-width: 180px;
+}
+
+.fila-cancion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-card);
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+/* Punto Crítico #3: Textos largos truncados sin desbordar pantallas móviles */
+.titulo-truncado {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+}
+
+.lista-segura {
+  list-style: none;
+  margin-top: 12px;
+}
+
+.item-reserva {
+  padding: 10px 12px;
+  background: var(--bg-soft);
+  border-left: 4px solid var(--teal-ipmatic);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+/* === [FUNCIONALIDAD COTIZADOR, MODAL Y TOAST]: Confirmación Empresarial === */
+.resumen-total-box {
+  background: linear-gradient(135deg, #0a2540, #00529b);
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 8px;
+  border-bottom: 3px solid var(--cyan-light);
+}
+
+.monto-destacado {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--cyan-light);
+  display: inline-block;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 25, 47, 0.78);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-contenido {
+  background: var(--bg-card);
+  color: var(--text-main);
+  width: 100%;
+  max-width: 460px;
+  border-radius: 14px;
+  border-top: 5px solid var(--blue-datamark);
+  padding: 22px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.timer-badge {
+  display: inline-block;
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-family: monospace;
+  font-size: 15px;
+}
+
+.toast-alert {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 3000;
+  background: var(--primary-bition);
+  color: #ffffff;
+  border-left: 5px solid var(--cyan-light);
+  padding: 14px 18px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  max-width: 340px;
+  font-size: 14px;
+}
+
+/* === [FUNCIONALIDAD CENTRO DE ACTIVIDAD EN VIVO]: Panel Consultas y Órdenes === */
+.stream-box {
+  border: 1px solid #1e3a5f;
+  padding: 16px;
+  border-radius: 10px;
+  background: #0a2540;
+  color: #ffffff;
+}
+
+.checkout-card {
+  border: 1px solid #0284c7;
+  padding: 16px;
+  border-radius: 10px;
+  background: #0c2d48;
+  color: #ffffff;
+}
+
+.log-stream,
+.log-box {
+  background: #061222;
+  color: #7dd3fc;
+  padding: 10px 12px;
+  border-radius: 8px;
+  max-height: 150px;
+  min-height: 105px;
+  overflow-y: auto;
+  font-size: 12.5px;
+  margin-top: 10px;
+  border: 1px solid #1e3a5f;
+}
+
+.log-box {
+  color: #93c5fd;
+}
+
+/* === [FUNCIONALIDAD FORMULARIO CONTACTO]: Validación y Alertas === */
+.error-msg {
+  display: none;
+  color: var(--accent-red);
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.success-alert {
+  display: none;
+  background: #dcfce7;
+  color: #166534;
+  border-left: 4px solid var(--accent-green);
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+/* ============================================================================
+   [FUNCIONALIDAD VISTA MÓVIL / PWA]: App Compacta sin Scroll de Página (100dvh)
+   - Bloquea el scroll del documento completo en mobile.html
+   - En PC (@media min-width: 1025px) centra un marco smartphone compacto
+   - Organiza subpaneles, miniaturas SVG con lazy-loading y tarjetas compactas
+   ============================================================================ */
+html:has(body.vista-mobile),
+body.vista-mobile {
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #0a2540 0%, #00529b 100%);
+}
+
+.pwa-container {
+  width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  min-height: 0;
+  margin: 0 auto;
+  background: var(--bg-body);
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+@media (min-width: 1025px) {
+  body.vista-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .pwa-container {
+    width: 400px;
+    max-width: 400px;
+    height: calc(100dvh - 24px);
+    max-height: 760px;
+    border-radius: 26px;
+    border: 7px solid #1e293b;
+    border-top: 5px solid var(--cyan-ia);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    position: relative;
+  }
+}
+
+.phone-status-bar {
+  background: #061222;
+  color: #cbd5e1;
+  padding: 4px 12px;
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.pwa-header {
+  background: #ffffff;
+  color: var(--primary-bition);
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--blue-datamark);
+  flex-shrink: 0;
+}
+
+body.dark-mode .pwa-header {
+  background: #081526;
+  color: #ffffff;
+}
+
+/* Menú hamburguesa en vista móvil como capa flotante sin empujar el contenido */
+body.vista-mobile #navMenu {
+  position: absolute;
+  top: 78px;
+  left: 0;
+  right: 0;
+  z-index: 980;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+.pwa-main-content {
+  padding: 8px 10px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Pestañas principales y subpaneles internos de pantalla única */
+.mobile-tab-panel,
+.mobile-subpanel {
+  display: none;
+}
+
+.mobile-tab-panel.active,
+.mobile-subpanel.active {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  gap: 6px;
+}
+
+body.vista-mobile .flex-fill {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+/* Barra superior interna de sub-pestañas dentro de cada vista */
+.mobile-subnav {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.btn-subtab {
+  flex: 1;
+  min-height: 32px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.btn-subtab.active {
+  background: linear-gradient(135deg, #0066cc, #0ea5e9);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 3px 10px rgba(0, 102, 204, 0.25);
+}
+
+/* Tarjetas compactas con imagen SVG lateral, truncado seguro y badges */
+.compact-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.compact-card-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.compact-card-thumb {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  flex-shrink: 0;
+  background: #0a2540;
+  padding: 4px;
+}
+
+.compact-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  flex: 1;
+  gap: 2px;
+}
+
+.compact-card h4,
+.compact-card h5 {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--primary-bition);
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body.dark-mode .compact-card h4,
+body.dark-mode .compact-card h5 {
+  color: var(--cyan-light);
+}
+
+.compact-card p {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.28;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.compact-card-row p {
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* Fila de estadísticas o pilares institucionales */
+.compact-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.compact-stat-pill {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 6px 4px;
+  text-align: center;
+}
+
+.compact-stat-pill strong {
+  display: block;
+  font-size: 12px;
+  color: var(--blue-datamark);
+  line-height: 1.15;
+}
+
+body.dark-mode .compact-stat-pill strong {
+  color: var(--cyan-light);
+}
+
+.compact-stat-pill span {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* Etiquetas tecnológicas / jurídicas dentro de tarjetas compactas */
+.compact-badges {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4px;
+  margin-top: 3px;
+  overflow: hidden;
+}
+
+.compact-badge {
+  font-size: 9.5px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: rgba(14, 165, 233, 0.14);
+  color: #0369a1;
+  border: 1px solid rgba(14, 165, 233, 0.28);
+  white-space: nowrap;
+  line-height: 1.1;
+}
+
+body.dark-mode .compact-badge {
+  color: var(--cyan-light);
+}
+
+/* Encabezado visual compacto con imagen en formularios y catálogos */
+.compact-banner-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.compact-banner-row img {
+  width: 34px;
+  height: 34px;
+  border-radius: 7px;
+  background: #0a2540;
+  padding: 3px;
+  flex-shrink: 0;
+}
+
+.compact-banner-row strong {
+  display: block;
+  font-size: 12px;
+  line-height: 1.15;
+  color: var(--primary-bition);
+}
+
+body.dark-mode .compact-banner-row strong {
+  color: var(--cyan-light);
+}
+
+.compact-banner-row small {
+  display: block;
+  font-size: 10.5px;
+  color: var(--text-muted);
+  line-height: 1.15;
+}
+
+/* Ajustes de densidad específicos para que ningún subpanel móvil tenga scroll */
+body.vista-mobile .seccion-card {
+  padding: 10px;
+  margin-bottom: 0;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+body.vista-mobile .seccion-header {
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+}
+
+body.vista-mobile .seccion-header h3 {
+  font-size: 13.5px;
+}
+
+body.vista-mobile .panel-tematico {
+  padding: 10px 12px;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+body.vista-mobile .panel-tematico h3 {
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+body.vista-mobile .panel-tematico p {
+  font-size: 11.5px;
+  line-height: 1.3;
+  margin-top: 2px !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+body.vista-mobile .grupo-botones-tema {
+  margin-top: 8px;
+  gap: 6px;
+}
+
+body.vista-mobile .grupo-botones-tema button {
+  min-height: 32px;
+  min-width: auto;
+  padding: 4px 10px;
+  font-size: 11px;
+  flex: 1;
+}
+
+body.vista-mobile .filtros-categoria {
+  margin-bottom: 4px;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+body.vista-mobile .filtros-categoria button {
+  min-height: 30px;
+  min-width: auto;
+  padding: 4px 8px;
+  font-size: 11px;
+  flex: 1;
+}
+
+body.vista-mobile .lista-soluciones-compacta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+body.vista-mobile .tarjeta-modulo {
+  padding: 8px 10px;
+  border-top-width: 3px;
+  flex: 1;
+  min-height: 0;
+}
+
+body.vista-mobile .tarjeta-modulo h4 {
+  font-size: 12.5px;
+  margin-bottom: 2px;
+}
+
+body.vista-mobile .accordion-item {
+  margin-bottom: 5px;
+}
+
+body.vista-mobile .accordion-btn {
+  padding: 8px 10px;
+  min-height: 36px;
+  font-size: 12px;
+}
+
+body.vista-mobile .accordion-panel {
+  padding: 8px 10px;
+  font-size: 11.5px;
+  line-height: 1.35;
+}
+
+body.vista-mobile .lista-marcas {
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+  overflow-y: auto;
+  margin-top: 4px;
+  gap: 6px;
+}
+
+body.vista-mobile .tarjeta-pista {
+  padding: 7px 8px;
+  gap: 8px;
+}
+
+body.vista-mobile .tarjeta-pista img {
+  width: 42px;
+  height: 42px;
+}
+
+body.vista-mobile .tarjeta-pista .btn-agregar-cola {
+  min-height: 32px;
+  min-width: auto;
+  padding: 4px 9px;
+  font-size: 11px;
+}
+
+body.vista-mobile .form-grupo {
+  margin-bottom: 6px;
+}
+
+body.vista-mobile .form-control {
+  min-height: 34px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+body.vista-mobile textarea.form-control {
+  min-height: 48px;
+  resize: none;
+}
+
+body.vista-mobile .btn-submit-compact {
+  min-height: 36px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  width: 100%;
+}
+
+body.vista-mobile .lista-segura {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  margin-top: 6px;
+}
+
+body.vista-mobile .item-reserva {
+  padding: 6px 8px;
+  margin-bottom: 5px;
+  font-size: 11.5px;
+}
+
+body.vista-mobile .cola-expedientes {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  overflow: hidden;
+}
+
+body.vista-mobile .cola-expedientes #listaCanciones {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+body.vista-mobile .fila-inline-form {
+  margin-bottom: 6px;
+  flex-wrap: nowrap;
+}
+
+body.vista-mobile .fila-inline-form input {
+  min-width: 0;
+}
+
+body.vista-mobile .fila-inline-form .btn-tactil {
+  min-height: 34px;
+  padding: 4px 10px;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+body.vista-mobile .fila-cancion {
+  padding: 5px 8px;
+  margin-bottom: 4px;
+}
+
+body.vista-mobile .fila-cancion .btn-quitar {
+  min-width: 32px;
+  min-height: 32px;
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+body.vista-mobile .resumen-total-box {
+  padding: 10px 12px;
+  margin-top: 4px;
+}
+
+body.vista-mobile .monto-destacado {
+  font-size: 20px;
+}
+
+body.vista-mobile .stream-box,
+body.vista-mobile .checkout-card {
+  padding: 8px 10px;
+}
+
+body.vista-mobile .log-stream,
+body.vista-mobile .log-box {
+  min-height: 48px;
+  max-height: 76px;
+  font-size: 11px;
+  padding: 6px 8px;
+  margin-top: 6px;
+}
+
+/* Barra inferior fija al pie del contenedor flex (sin flotar ni generar scroll) */
+.mobile-bottom-nav {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  transform: none;
+  width: 100%;
+  max-width: 100%;
+  height: 52px;
+  background: #0a2540;
+  border-top: 2px solid var(--cyan-ia);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  z-index: 950;
+  flex-shrink: 0;
+}
+
+.btn-nav-tab {
+  min-height: 50px;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 10.5px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+}
+
+.btn-nav-tab.active {
+  color: var(--cyan-light);
+  background: rgba(56, 189, 248, 0.12);
+}
+
+/* Footer corporativo */
+.footer-bition {
+  background: var(--primary-bition);
+  color: #e2e8f0;
+  text-align: center;
+  padding: 24px 20px;
+  font-size: 13px;
+  border-top: 3px solid var(--cyan-ia);
+  margin-top: 24px;
+}
+
+/* === [RESPONSIVIDAD DESKTOP -> TABLET -> MÓVIL Y PUNTO CRÍTICO #4 LANDSCAPE] === */
+@media (max-width: 960px) {
+  .hero-bition,
+  .grid-2-cols,
+  .grid-3-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links-desktop {
+    display: none;
+  }
+}
+
+/* Punto Crítico #4: Modo Landscape compacto cuando la altura es <= 500px */
+@media (orientation: landscape) and (max-height: 500px) {
+  .navbar-inner,
+  .pwa-header {
+    padding: 5px 12px;
+  }
+
+  .hero-bition {
+    padding: 18px;
+  }
+
+  .cola-expedientes {
+    padding: 6px 10px;
+  }
+
+  .mobile-bottom-nav {
+    height: 46px;
+  }
+
+  .mobile-bottom-nav .btn-nav-tab {
+    min-height: 44px;
+  }
+}
+
+/* ============================================================================
+   [FUNCIONALIDAD LOGIN POR ROLES]: Badge Indicador de Vista y Modal de Acceso
+   - Muestra el <span> #badgeRolVista con color distintivo por perfil:
+     Invitado, Cliente, Trabajador o Administrador
+   ============================================================================ */
+.rol-vista-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.rol-vista-badge.rol-invitado {
+  background: #e2e8f0;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+.rol-vista-badge.rol-cliente {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border: 1px solid #93c5fd;
+}
+
+.rol-vista-badge.rol-trabajador {
+  background: #ccfbf1;
+  color: #0f766e;
+  border: 1px solid #5eead4;
+}
+
+.rol-vista-badge.rol-admin {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fcd34d;
+}
+
+body.dark-mode .rol-vista-badge.rol-invitado {
+  background: #1e293b;
+  color: #cbd5e1;
+  border-color: #334155;
+}
+
+body.dark-mode .rol-vista-badge.rol-cliente {
+  background: rgba(59, 130, 246, 0.22);
+  color: #93c5fd;
+  border-color: rgba(147, 197, 253, 0.45);
+}
+
+body.dark-mode .rol-vista-badge.rol-trabajador {
+  background: rgba(20, 184, 166, 0.22);
+  color: #5eead4;
+  border-color: rgba(94, 234, 212, 0.45);
+}
+
+body.dark-mode .rol-vista-badge.rol-admin {
+  background: rgba(245, 158, 11, 0.22);
+  color: #fcd34d;
+  border-color: rgba(252, 211, 77, 0.45);
+}
+
+.btn-login-acceso {
+  white-space: nowrap;
+}
+
+.credenciales-guia {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--cyan-ia);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.credenciales-guia code {
+  background: rgba(14, 165, 233, 0.14);
+  color: var(--blue-datamark);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+body.dark-mode .credenciales-guia code {
+  color: var(--cyan-light);
+}
+
+body.vista-mobile .modal-contenido {
+  padding: 16px;
+  max-height: 92dvh;
+  overflow-y: auto;
+}

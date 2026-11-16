@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- === [FUNCIONALIDAD PWA 1]: Configuración Viewport Mandatoria para App Móvil sin Scroll === -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0066cc">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="description" content="Bition S.R.L. App Móvil — Datamark + IA e IPMatic para Propiedad Intelectual en Bolivia.">
+  <title>Bition S.R.L. | Versión Móvil</title>
+
+  <!-- === [FUNCIONALIDAD PWA 2]: Web App Manifest & Ícono Instalable === -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
+
+  <!-- === [FUNCIONALIDAD ESTILOS]: CSS Unificado con Puntos Críticos UI Móvil (100dvh) === -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- === [FUNCIONALIDAD JQUERY]: jQuery 3.7.1 para Efectos y Delegación === -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body class="vista-mobile">
+
+  <!-- === [FUNCIONALIDAD CONTENEDOR PWA]: Marco Smartphone sin Scroll en PC y 100dvh en Celular === -->
+  <div class="pwa-container">
+
+    <!-- Barra Superior de Estado, Indicador de Rol Activo y Cambio a Vista PC -->
+    <div class="phone-status-bar" style="gap: 4px;">
+      <span style="white-space: nowrap;">Bition • Móvil</span>
+      <span id="estadoRed" class="estado-red-badge" style="padding: 2px 6px; font-size: 9.5px;">🟢 En Línea</span>
+      <span id="badgeRolVista" class="rol-vista-badge rol-invitado" style="padding: 2px 7px; font-size: 9.5px;">🔒 Vista: Invitado</span>
+      <a href="index.html" style="color: #38bdf8; text-decoration: none; font-weight: 600; white-space: nowrap;">🖥️ PC</a>
+    </div>
+
+    <!-- Header Corporativo Compacto Estilo bition.com.bo -->
+    <header class="pwa-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <img src="icons/icon-192.svg" alt="Logo Bition S.R.L." width="34" height="34" style="border-radius: 8px;" loading="lazy">
+        <div>
+          <h2 style="font-size: 15px; line-height: 1.1;">Bition S.R.L.</h2>
+          <small style="color: #0066cc; font-size: 10.5px; font-weight: 600;">Datamark + IA • IPMatic</small>
+        </div>
+      </div>
+
+      <!-- Hidratación SSR aplicada a cada botón + Login + Dark Mode + Botón Hamburguesa -->
+      <div id="contenedorMenu" data-hidratado="false" style="display: flex; gap: 5px; align-items: center;">
+        <button id="btnAbrirLogin" class="btn-primario btn-login-acceso btn-hidratable" data-hidratado="false" type="button" style="min-height: 36px; min-width: 36px; padding: 4px 8px; font-size: 11px;" title="Iniciar Sesión / Cambiar Rol">🔑 Login</button>
+        <button id="themeBtn" class="btn-secundario btn-hidratable" data-hidratado="false" type="button" style="min-height: 36px; min-width: 36px; padding: 4px 8px; font-size: 13px;" title="Cambiar tema">🌓</button>
+        <button id="hamburgerBtn" class="menu-toggle btn-hidratable" data-hidratado="false" type="button" style="min-height: 36px; min-width: 36px; padding: 4px 8px;" aria-label="Abrir Menú">☰</button>
+      </div>
+    </header>
+
+    <!-- Menú Hamburguesa Desplegable como capa flotante (.slideToggle) -->
+    <nav class="nav-menu" id="navMenu">
+      <ul>
+        <li><a href="#tab-inicio" class="link-tab-movil" data-tab="tab-inicio">🏢 Quiénes Somos y Soluciones</a></li>
+        <li><a href="#tab-datamark" class="link-tab-movil" data-tab="tab-datamark">🔎 Datamark + IA (Gaceta Oficial)</a></li>
+        <li><a href="#tab-ipmatic" class="link-tab-movil" data-tab="tab-ipmatic">⚖️ IPMatic SENAPI y Licencias</a></li>
+        <li><a href="#tab-pwa" class="link-tab-movil" data-tab="tab-pwa">✉️ Consultas y Contacto</a></li>
+        <li><a href="index.html">🖥️ Ir a Vista Computadora</a></li>
+      </ul>
+    </nav>
+
+    <!-- === CONTENIDO PRINCIPAL DE LA APP MÓVIL POR PESTAÑAS (CERO SCROLL DE PÁGINA) === -->
+    <main class="pwa-main-content">
+
+      <!-- PESTAÑA 1: INICIO / EMPRESA, SOLUCIONES Y VENTAJAS -->
+      <section id="tab-inicio" class="mobile-tab-panel active">
+
+        <!-- Sub-navegación interna para evitar scroll vertical en Inicio -->
+        <div class="mobile-subnav" role="tablist" aria-label="Secciones de Inicio">
+          <button class="btn-subtab btn-hidratable active" data-hidratado="false" type="button" data-subtab="sub-empresa">🏢 Empresa</button>
+          <button class="btn-subtab btn-hidratable" data-hidratado="false" type="button" data-subtab="sub-soluciones">🧩 Soluciones</button>
+          <button class="btn-subtab btn-hidratable" data-hidratado="false" type="button" data-subtab="sub-ventajas">🛡️ Ventajas</button>
+        </div>
+
+        <!-- Subpanel 1A: Presentación Corporativa + Temática Dinámica + Quiénes Somos -->
+        <div id="sub-empresa" class="mobile-subpanel active">
+          <!-- Tarjeta Corporativa con Cambio Dinámico de Temática (.addClass/.removeClass) -->
+          <div class="panel-tematico tema-datamark" id="panelTematico">
+            <span class="hero-badge" style="margin-bottom: 4px; padding: 3px 10px; font-size: 10.5px;">Propiedad Intelectual Bolivia</span>
+            <h3 id="tituloTema"><span id="iconoTema">🏢</span> Bition S.R.L.</h3>
+            <p id="descTema">
+              Fundada el 26/04/2017. Modernizamos y damos certeza jurídica a la gestión de marcas ante el SENAPI y la Gaceta Oficial.
+            </p>
+            <div class="grupo-botones-tema">
+              <button class="btn-accion btn-tema-sistema btn-hidratable" data-hidratado="false" type="button" data-tema="datamark">Datamark</button>
+              <button class="btn-primario btn-tema-sistema btn-hidratable" data-hidratado="false" type="button" data-tema="ia">IA Visual</button>
+              <button class="btn-secundario btn-tema-sistema btn-hidratable" data-hidratado="false" type="button" data-tema="ipmatic">IPMatic</button>
+            </div>
+          </div>
+
+          <!-- Tarjeta Compacta "Quiénes Somos" con miniatura SVG y badges -->
+          <article class="compact-card flex-fill" style="justify-content: center;">
+            <div class="compact-card-row">
+              <img src="icons/icon-192.svg" alt="Identidad Bition S.R.L." class="compact-card-thumb" loading="lazy">
+              <div class="compact-card-body">
+                <h4>Quiénes Somos • Desde 26/04/2017</h4>
+                <p>Transformamos la Propiedad Intelectual en Bolivia desarrollando herramientas digitales para estudios jurídicos y agentes PI ante el SENAPI y la Gaceta Oficial.</p>
+                <div class="compact-badges">
+                  <span class="compact-badge">Desde 2017</span>
+                  <span class="compact-badge">Estudios Jurídicos</span>
+                  <span class="compact-badge">SENAPI</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Indicadores Institucionales Compactos -->
+          <div class="compact-stats-row">
+            <div class="compact-stat-pill">
+              <strong>26/04/2017</strong>
+              <span>Fundación</span>
+            </div>
+            <div class="compact-stat-pill">
+              <strong>SENAPI</strong>
+              <span>Gestión Integral</span>
+            </div>
+            <div class="compact-stat-pill">
+              <strong>Gaceta Oficial</strong>
+              <span>Migración Mensual</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subpanel 1B: Soluciones Tecnológicas con Filtrado DOM e Imágenes SVG -->
+        <div id="sub-soluciones" class="mobile-subpanel">
+          <div class="filtros-categoria">
+            <button class="btn-primario btn-filtro-cat btn-hidratable" data-hidratado="false" type="button" data-cat="todos">Todas</button>
+            <button class="btn-secundario btn-filtro-cat btn-hidratable" data-hidratado="false" type="button" data-cat="datamark">Datamark</button>
+            <button class="btn-secundario btn-filtro-cat btn-hidratable" data-hidratado="false" type="button" data-cat="ia-figurativa">IA Visual</button>
+            <button class="btn-secundario btn-filtro-cat btn-hidratable" data-hidratado="false" type="button" data-cat="ipmatic">IPMatic</button>
+          </div>
+
+          <div class="lista-soluciones-compacta">
+            <div class="tarjeta-modulo compact-card" data-categoria="datamark">
+              <div class="compact-card-row">
+                <img src="icons/logo-datamark.svg" alt="Plataforma Datamark" class="compact-card-thumb" loading="lazy">
+                <div class="compact-card-body">
+                  <h4>1. Datamark — Anterioridades</h4>
+                  <p>Base mensual migrada desde la Gaceta Oficial para estudiar viabilidad con búsqueda fonética, silábica y semántica.</p>
+                  <div class="compact-badges">
+                    <span class="compact-badge">Gaceta Mensual</span>
+                    <span class="compact-badge">Búsqueda Mixta</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tarjeta-modulo compact-card" data-categoria="ia-figurativa">
+              <div class="compact-card-row">
+                <img src="icons/logo-ia.svg" alt="Datamark IA Figurativa" class="compact-card-thumb" loading="lazy">
+                <div class="compact-card-body">
+                  <h4>2. Datamark + IA — Visual</h4>
+                  <p>Repositorio nacional de logotipos e isotipos que analiza formas, trazos y composiciones visuales con IA.</p>
+                  <div class="compact-badges">
+                    <span class="compact-badge">IA Figurativa</span>
+                    <span class="compact-badge">Logotipos</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tarjeta-modulo compact-card" data-categoria="ipmatic">
+              <div class="compact-card-row">
+                <img src="icons/logo-ipmatic.svg" alt="Sistema ERP IPMatic" class="compact-card-thumb" loading="lazy">
+                <div class="compact-card-body">
+                  <h4>3. IPMatic — Gestión ERP</h4>
+                  <p>Ciclo ante el SENAPI: formularios, oposiciones como demandante o demandado, denegatorias, plazos y archivo digital.</p>
+                  <div class="compact-badges">
+                    <span class="compact-badge">Plazos SENAPI</span>
+                    <span class="compact-badge">Expedientes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subpanel 1C: Pilares Visuales + Acordeones jQuery sin Desbordar Pantalla -->
+        <div id="sub-ventajas" class="mobile-subpanel">
+          <div class="compact-stats-row">
+            <div class="compact-stat-pill">
+              <img src="icons/logo-senapi.svg" alt="Normativa SENAPI" width="28" height="28" loading="lazy" style="border-radius: 6px; background: #0a2540; padding: 2px; margin-bottom: 2px;">
+              <strong>Normativa</strong>
+              <span>100% SENAPI</span>
+            </div>
+            <div class="compact-stat-pill">
+              <img src="icons/logo-ia.svg" alt="Prevención con IA" width="28" height="28" loading="lazy" style="border-radius: 6px; background: #0a2540; padding: 2px; margin-bottom: 2px;">
+              <strong>Prevención</strong>
+              <span>Textual + IA</span>
+            </div>
+            <div class="compact-stat-pill">
+              <img src="icons/logo-ipmatic.svg" alt="Cero Vencimientos" width="28" height="28" loading="lazy" style="border-radius: 6px; background: #0a2540; padding: 2px; margin-bottom: 2px;">
+              <strong>Alertas</strong>
+              <span>0 Vencimientos</span>
+            </div>
+          </div>
+
+          <article class="seccion-card flex-fill" style="display: flex; flex-direction: column; justify-content: flex-start; min-height: 0;">
+            <div class="seccion-header">
+              <h3>¿Por qué elegir Bition?</h3>
+              <span class="seccion-subtitulo">Ecosistema PI</span>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-btn btn-hidratable" data-hidratado="false" type="button">Especialización Local (SENAPI y Gaceta) <span>▼</span></button>
+              <div class="accordion-panel" style="display: block;">Software adaptado 100% a la normativa, tiempos y estructura de publicaciones del SENAPI y la Gaceta Oficial de Bolivia.</div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-btn btn-hidratable" data-hidratado="false" type="button">Prevención de Riesgos y 0 Vencimientos <span>▼</span></button>
+              <div class="accordion-panel">La búsqueda textual y visual por IA reduce rechazos u oposiciones, con trazabilidad total y alertas tempranas para pruebas.</div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-btn btn-hidratable" data-hidratado="false" type="button">Eficiencia Operativa <span>▼</span></button>
+              <div class="accordion-panel">Centralización de expedientes digitales escaneados y reducción de horas-hombre en tareas repetitivas de revisión.</div>
+            </div>
+          </article>
+        </div>
+
+      </section>
+
+      <!-- PESTAÑA 2: DATAMARK + IA (GACETA OFICIAL CON FETCH Y LAZY LOADING) -->
+      <section id="tab-datamark" class="mobile-tab-panel">
+
+        <!-- Cabecera Compacta con Logo Gaceta -->
+        <div class="compact-banner-row">
+          <img src="icons/logo-gaceta.svg" alt="Gaceta Oficial de Bolivia" loading="lazy">
+          <div>
+            <strong>Gaceta Oficial de Bolivia</strong>
+            <small>Consulta asíncrona con filtros mixtos e IA</small>
+          </div>
+        </div>
+
+        <!-- Buscador en Vivo y Botones de Filtro IA -->
+        <input type="text" id="searchMarca" class="form-control" placeholder="Buscar marca, fonética o gaceta..." style="flex-shrink: 0;">
+        <div class="filtros-categoria">
+          <button class="btn-tactil btn-modo-ia btn-hidratable" data-hidratado="false" type="button" data-query="">Todas</button>
+          <button class="btn-tactil btn-modo-ia btn-hidratable" data-hidratado="false" type="button" data-query="Fonética">Fonética</button>
+          <button class="btn-tactil btn-modo-ia btn-hidratable" data-hidratado="false" type="button" data-query="Semántica">Semántica</button>
+          <button class="btn-tactil btn-modo-ia btn-hidratable" data-hidratado="false" type="button" data-query="Figurativa">Figurativa</button>
+        </div>
+
+        <!-- Contenedor con scroll interno propio sin desplazar el resto de la pantalla -->
+        <div id="catalogoMarcas" class="lista-marcas"></div>
+
+      </section>
+
+      <!-- PESTAÑA 3: IPMATIC (TRÁMITES ANTI-XSS, VIGILANCIA 44PX Y COTIZADOR) -->
+      <section id="tab-ipmatic" class="mobile-tab-panel">
+
+        <!-- Sub-navegación interna para Trámites, Vigilancia y Cotizador -->
+        <div class="mobile-subnav" role="tablist" aria-label="Secciones de IPMatic">
+          <button class="btn-subtab btn-hidratable active" data-hidratado="false" type="button" data-subtab="sub-tramites">📝 Trámites</button>
+          <button class="btn-subtab btn-hidratable" data-hidratado="false" type="button" data-subtab="sub-vigilancia">⏱️ Vigilancia</button>
+          <button class="btn-subtab btn-hidratable" data-hidratado="false" type="button" data-subtab="sub-cotizador">💳 Cotizador</button>
+        </div>
+
+        <!-- Subpanel 3A: Registro de Trámite Sanitizado (Anti-XSS .text()) + Validación blur -->
+        <div id="sub-tramites" class="mobile-subpanel active">
+          <div class="compact-banner-row">
+            <img src="icons/logo-senapi.svg" alt="Gestión SENAPI" loading="lazy">
+            <div>
+              <strong>Registrar Trámite SENAPI</strong>
+              <small>Validación en tiempo real y sanitización Anti-XSS</small>
+            </div>
+          </div>
+
+          <article class="seccion-card flex-fill" style="display: flex; flex-direction: column; min-height: 0;">
+            <form id="formReserva" novalidate style="flex-shrink: 0;">
+              <div class="form-grupo">
+                <input type="text" id="clienteNombre" class="form-control" placeholder="Titular, solicitante o apoderado" required>
+                <span id="errClienteNombre" class="error-msg">⚠️ Ingresa el titular, solicitante o apoderado.</span>
+              </div>
+              <div class="form-grupo">
+                <select id="salaSelect" class="form-control">
+                  <option value="Solicitud de Registro (Formulario SENAPI)">Solicitud de Registro (Formulario SENAPI)</option>
+                  <option value="Oposición como Demandante (Plazo Pruebas)">Oposición como Demandante (Plazo Pruebas)</option>
+                  <option value="Defensa como Demandado (Contestación)">Defensa como Demandado (Contestación)</option>
+                  <option value="Descargo ante Denegatoria de Registro">Descargo ante Denegatoria de Registro</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-accion btn-submit-compact btn-hidratable" data-hidratado="false">Registrar en IPMatic</button>
+            </form>
+            <ul id="listaReservas" class="lista-segura"></ul>
+          </article>
+        </div>
+
+        <!-- Subpanel 3B: Cola de Vigilancia Blindada -->
+        <div id="sub-vigilancia" class="mobile-subpanel">
+          <div class="compact-banner-row">
+            <img src="icons/logo-gaceta.svg" alt="Vigilancia de Plazos" loading="lazy">
+            <div>
+              <strong>Vigilancia de Plazos SENAPI</strong>
+              <small>Cola segura de expedientes y descargos</small>
+            </div>
+          </div>
+
+          <article class="seccion-card cola-expedientes">
+            <div class="fila-inline-form">
+              <input type="text" id="inputCancion" class="form-control" placeholder="Agregar expediente o plazo...">
+              <button id="btnPedir" class="btn-tactil btn-hidratable" data-hidratado="false" type="button">+ Vigilar</button>
+            </div>
+            <span id="errInputCancion" class="error-msg" style="margin-top: -2px; margin-bottom: 6px;">⚠️ Escribe el expediente o plazo que deseas vigilar.</span>
+            <div id="listaCanciones"></div>
+          </article>
+        </div>
+
+        <!-- Subpanel 3C: Calculador en Vivo (.animate()) + Modal Temporizador 30s -->
+        <div id="sub-cotizador" class="mobile-subpanel">
+          <div class="compact-banner-row">
+            <img src="icons/logo-ipmatic.svg" alt="Cotizador IPMatic" loading="lazy">
+            <div>
+              <strong>Cotizador de Licencias</strong>
+              <small>Estimación mensual para estudios y agentes PI</small>
+            </div>
+          </div>
+
+          <article class="seccion-card flex-fill" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 0;">
+            <div>
+              <div class="form-grupo">
+                <select id="planTarifa" class="form-control">
+                  <option value="250">Estudio Jurídico / Agente PI (250 BOB/mes)</option>
+                  <option value="400">Departamento Legal (400 BOB/mes)</option>
+                  <option value="650">Ecosistema Completo (650 BOB/mes)</option>
+                </select>
+              </div>
+              <div class="form-grupo">
+                <label for="hrs" style="font-size: 12px; margin-bottom: 3px;">Meses (1 a 36):</label>
+                <input type="number" id="hrs" class="form-control" value="1" min="1" max="36">
+                <span id="errHrs" class="error-msg">⚠️ Ingresa una cantidad válida de meses (1 a 36).</span>
+              </div>
+              <div class="form-grupo" style="font-size: 12px; display: flex; flex-direction: column; gap: 4px; margin-bottom: 4px;">
+                <label style="font-weight: 400; margin: 0;"><input type="checkbox" class="extra-modulo" value="120" data-nombre="Búsqueda Figurativa IA"> + IA Logos (120 BOB)</label>
+                <label style="font-weight: 400; margin: 0;"><input type="checkbox" class="extra-modulo" value="90" data-nombre="Alertas Plazos SENAPI"> + Alertas SENAPI (90 BOB)</label>
+              </div>
+            </div>
+
+            <div class="resumen-total-box">
+              <div style="display: flex; align-items: baseline; justify-content: space-between;">
+                <span style="font-size: 13px;">Total Estimado:</span>
+                <span><span id="total" class="monto-destacado">250</span> <small>BOB</small></span>
+              </div>
+              <p id="estadoExpirado" style="font-size: 11px; color: #bae6fd; display: none; margin-top: 2px;">La reserva temporal expiró. Vuelve a confirmar.</p>
+              <button id="btnModal" class="btn-accion btn-submit-compact btn-hidratable" data-hidratado="false" type="button" style="margin-top: 6px;">Solicitar Cotización</button>
+            </div>
+          </article>
+        </div>
+
+      </section>
+
+      <!-- PESTAÑA 4: CONSULTAS EN VIVO Y CONTACTO PWA -->
+      <section id="tab-pwa" class="mobile-tab-panel">
+
+        <!-- Sub-navegación interna para Contacto y Consultas Rápidas -->
+        <div class="mobile-subnav" role="tablist" aria-label="Secciones de Contacto">
+          <button class="btn-subtab btn-hidratable active" data-hidratado="false" type="button" data-subtab="sub-contacto">✉️ Contacto</button>
+          <button class="btn-subtab btn-hidratable" data-hidratado="false" type="button" data-subtab="sub-consultas">⚡ Consultas</button>
+        </div>
+
+        <!-- Subpanel 4A: Formulario Contacto con Validación blur/input y Respaldo Offline -->
+        <div id="sub-contacto" class="mobile-subpanel active">
+          <div class="compact-banner-row">
+            <img src="icons/icon-192.svg" alt="Contacto Bition S.R.L." loading="lazy">
+            <div>
+              <strong>Contáctanos — Bition S.R.L.</strong>
+              <small>Validación en tiempo real y respaldo offline</small>
+            </div>
+          </div>
+
+          <article class="seccion-card flex-fill" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 0;">
+            <form id="pwaForm" novalidate>
+              <div class="form-grupo">
+                <input type="text" id="nombre" class="form-control" placeholder="Tu Nombre o Estudio Jurídico">
+                <span id="errNombre" class="error-msg">⚠️ Ingresa tu nombre o empresa.</span>
+              </div>
+              <div class="form-grupo">
+                <input type="email" id="correo" class="form-control" placeholder="Correo electrónico corporativo">
+                <span id="errCorreo" class="error-msg">⚠️ Correo electrónico inválido.</span>
+              </div>
+              <div class="form-grupo">
+                <textarea id="mensaje" class="form-control" rows="2" placeholder="Consulta sobre Datamark o IPMatic..."></textarea>
+                <span id="errMensaje" class="error-msg">⚠️ Describe brevemente tu consulta (mínimo 5 caracteres).</span>
+              </div>
+              <button type="submit" class="btn-primario btn-submit-compact btn-hidratable" data-hidratado="false">Enviar Solicitud</button>
+            </form>
+            <div id="successAlert" class="success-alert" style="margin-top: 6px; padding: 8px; font-size: 12px;"></div>
+          </article>
+        </div>
+
+        <!-- Subpanel 4B: Centro de Consultas Rápidas y Órdenes -->
+        <div id="sub-consultas" class="mobile-subpanel">
+          <article class="seccion-card" style="padding: 8px;">
+            <div id="liveContainer" class="stream-box">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; gap: 6px;">
+                <span style="font-size: 12px; font-weight: 600;">Consultas Rápidas</span>
+                <div style="display: flex; gap: 4px;">
+                  <button class="btn-accion btn-hidratable" data-hidratado="false" type="button" data-prod="Consulta Fonética" style="min-height: 30px; min-width: auto; padding: 3px 8px; font-size: 11px;">🔍 Fonética</button>
+                  <button class="btn-tactil btn-hidratable" data-hidratado="false" type="button" data-action="like" style="min-height: 30px; min-width: auto; padding: 3px 8px; font-size: 11px;">⭐ Prioridad</button>
+                </div>
+              </div>
+              <input type="text" id="chatInput" class="form-control" placeholder="Escribe una marca o nota...">
+              <div id="logOutput" class="log-stream"><div>[Bition] Centro de consultas activo...</div></div>
+            </div>
+          </article>
+
+          <article class="seccion-card flex-fill" style="padding: 8px; display: flex; flex-direction: column; min-height: 0;">
+            <div class="checkout-card" style="display: flex; flex-direction: column; flex: 1; min-height: 0;">
+              <form id="orderForm" novalidate style="flex-shrink: 0;">
+                <select id="variantSelect" class="form-control" style="margin-bottom: 6px;">
+                  <option value="Reporte Único IA - 150 BOB">Reporte Único IA - 150 BOB</option>
+                  <option value="Ecosistema Mensual - 650 BOB">Ecosistema Mensual - 650 BOB</option>
+                </select>
+                <input type="text" id="userTikTok" class="form-control" placeholder="Nombre de Firma o Empresa" required style="margin-bottom: 4px;">
+                <span id="errUserTikTok" class="error-msg" style="color: #fca5a5; margin-bottom: 4px;">⚠️ Ingresa el nombre de la firma o empresa.</span>
+                <button type="submit" class="btn-accion btn-submit-compact btn-hidratable" data-hidratado="false">Registrar Solicitud</button>
+              </form>
+              <div id="logDia2" class="log-box"><div>[Historial] Sin registros aún.</div></div>
+            </div>
+          </article>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Barra Inferior de Navegación Móvil Estilo App (4 Pestañas sin Desborde) -->
+    <nav class="mobile-bottom-nav" aria-label="Navegación App Móvil">
+      <button class="btn-nav-tab btn-hidratable active" data-hidratado="false" type="button" data-tab="tab-inicio">
+        <span>🏢</span>
+        <span>Inicio</span>
+      </button>
+      <button class="btn-nav-tab btn-hidratable" data-hidratado="false" type="button" data-tab="tab-datamark">
+        <span>🔎</span>
+        <span>Datamark</span>
+      </button>
+      <button class="btn-nav-tab btn-hidratable" data-hidratado="false" type="button" data-tab="tab-ipmatic">
+        <span>⚖️</span>
+        <span>IPMatic</span>
+      </button>
+      <button class="btn-nav-tab btn-hidratable" data-hidratado="false" type="button" data-tab="tab-pwa">
+        <span>✉️</span>
+        <span>Contacto</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- === [COMPONENTE MODAL UI]: Ventana Confirmatoria con Temporizador 30s === -->
+  <div id="modalReserva" class="modal-overlay">
+    <div class="modal-contenido">
+      <div class="modal-header">
+        <h3>Confirmar Solicitud — Bition</h3>
+        <button id="btnCerrarModal" class="btn-tactil btn-hidratable" data-hidratado="false" type="button">✕</button>
+      </div>
+      <div class="item-card" style="margin-bottom: 12px;">
+        <div><strong>Servicio:</strong> <span id="modalDetalle"></span></div>
+        <div><strong>Monto Estimado:</strong> <span id="modalMonto"></span> BOB</div>
+        <div><strong>Vigencia:</strong> <span id="timerCountdown" class="timer-badge">00:30</span></div>
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 8px;">
+        <button id="btnCancelarModal" class="btn-secundario btn-hidratable" data-hidratado="false" type="button">Cancelar</button>
+        <button id="btnProcesarModal" class="btn-accion btn-hidratable" data-hidratado="false" type="button">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- === [COMPONENTE MODAL LOGIN POR ROLES]: Identifica Vista Cliente / Trabajador / Administrador === -->
+  <div id="modalLogin" class="modal-overlay">
+    <div class="modal-contenido">
+      <div class="modal-header">
+        <h3>Iniciar Sesión — Bition</h3>
+        <button id="btnCerrarLogin" class="btn-tactil btn-hidratable" data-hidratado="false" type="button" aria-label="Cerrar Login">✕</button>
+      </div>
+      <div class="credenciales-guia">
+        <strong>Cuentas disponibles:</strong><br>
+        • Cliente: <code>cliente</code> / <code>1234</code><br>
+        • Trabajador: <code>trabajador</code> / <code>1234</code><br>
+        • Administrador: <code>admin</code> / <code>1234</code>
+      </div>
+      <form id="formLogin" novalidate>
+        <div class="form-grupo">
+          <label for="loginUsuario">Cuenta / Usuario:</label>
+          <input type="text" id="loginUsuario" class="form-control" placeholder="cliente, trabajador o admin" autocomplete="username">
+          <span id="errLoginUsuario" class="error-msg">⚠️ Ingresa tu cuenta (mínimo 3 caracteres).</span>
+        </div>
+        <div class="form-grupo">
+          <label for="loginPassword">Contraseña:</label>
+          <input type="password" id="loginPassword" class="form-control" placeholder="Ingresa tu contraseña" autocomplete="current-password">
+          <span id="errLoginPassword" class="error-msg">⚠️ Ingresa tu contraseña (mínimo 4 caracteres).</span>
+        </div>
+        <span id="errCredencialesLogin" class="error-msg" style="margin-bottom: 10px;">⚠️ Cuenta o contraseña incorrecta. Verifica los datos de prueba.</span>
+        <div style="display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap;">
+          <button id="btnCerrarSesion" class="btn-secundario btn-hidratable" data-hidratado="false" type="button" style="display: none;">Cerrar Sesión</button>
+          <button id="btnSubmitLogin" class="btn-accion btn-hidratable" data-hidratado="false" type="submit">Ingresar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- === [RETO UI NIVEL PRO]: Toast Alert Flotante === -->
+  <div id="toastAlert" class="toast-alert">
+    <strong>Bition S.R.L.</strong>
+    <p id="toastMsg"></p>
+  </div>
+
+  <!-- === [LÓGICA COMPLETA EN JAVASCRIPT + JQUERY] === -->
+  <script src="script.js"></script>
+</body>
+</html>
